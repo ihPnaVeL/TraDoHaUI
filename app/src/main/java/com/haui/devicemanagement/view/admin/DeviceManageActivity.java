@@ -23,6 +23,7 @@ import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.entity.Device;
 import com.haui.devicemanagement.presenter.DevicePresenter;
+import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.DeviceAdapter;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class DeviceManageActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_manage);
+        ThemeHelper.applyDarkTheme(this);
 
         presenter = new DevicePresenter(DatabaseHelper.getInstance(this));
 
@@ -130,12 +132,13 @@ public class DeviceManageActivity extends AppCompatActivity
 
         if (isEdit) {
             builder.setNeutralButton("Xóa", (dialog, which) -> {
-                new AlertDialog.Builder(this)
+                AlertDialog deleteConfirmDialog = new AlertDialog.Builder(this)
                         .setTitle("Xác nhận xóa")
                         .setMessage("Bạn có chắc chắn muốn xóa loại thiết bị này không? Hành động này không thể hoàn tác nếu không có thiết bị vật lý liên quan.")
                         .setPositiveButton("Xóa", (d, w) -> presenter.deleteDevice(device.getId(), DeviceManageActivity.this))
                         .setNegativeButton("Hủy", null)
                         .show();
+                ThemeHelper.applyDarkThemeToDialog(deleteConfirmDialog);
             });
         }
 
@@ -171,6 +174,7 @@ public class DeviceManageActivity extends AppCompatActivity
             });
         });
         alertDialog.show();
+        ThemeHelper.applyDarkThemeToDialog(alertDialog);
     }
 
     @Override

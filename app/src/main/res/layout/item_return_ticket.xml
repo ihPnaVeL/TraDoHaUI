@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#252527">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="RT-20260521-001"
-                android:textColor="@color/primary"
+                android:textColor="#5B9EF0"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/divider" />
+            android:background="#2C2C2E" />
 
         <!-- Phiếu mượn gốc -->
         <LinearLayout
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phiếu mượn gốc: "
-                android:textColor="@color/text_secondary"
+                android:textColor="#8E8E8E"
                 android:textSize="13sp" />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="BR-20260521-001"
-                android:textColor="@color/text_primary"
+                android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Người trả: "
-                android:textColor="@color/text_secondary"
+                android:textColor="#8E8E8E"
                 android:textSize="13sp" />
 
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Văn An (2021600001)"
-                android:textColor="@color/text_primary"
+                android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ngày gửi trả"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="#8E8E8E"
                     android:textSize="11sp" />
 
                 <TextView
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="21/05/2026 09:30"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp" />
 
             </LinearLayout>

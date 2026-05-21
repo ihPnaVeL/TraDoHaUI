@@ -19,14 +19,17 @@ import com.haui.devicemanagement.util.SessionManager;
 import com.haui.devicemanagement.view.auth.LoginActivity;
 import com.haui.devicemanagement.view.common.NotificationActivity;
 
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
+import com.haui.devicemanagement.util.ThemeHelper;
+
 /**
  * AdminDashboardActivity — Trang tổng quan Admin.
  *
  * Hiển thị:
  * - Số phiếu mượn chờ duyệt.
  * - Số phiếu trả chờ xác nhận.
- * - Số thiết bị đang mượn.
- * - Số thiết bị hỏng/mất.
  * - Số phiếu quá hạn.
  */
 public class AdminDashboardActivity extends AppCompatActivity {
@@ -42,7 +45,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private CardView       cardDeviceManage;
     private CardView       cardUserManage;
     private CardView       cardReport;
-    private CardView       cardOverdue;
+    private CardView       cardOverdueWarning;
+
+    private DrawerLayout   drawerLayout;
+    private NavigationView navigationView;
 
     private SessionManager   session;
     private BorrowTicketDao  borrowTicketDao;
@@ -61,12 +67,17 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         initViews();
         setupClickListeners();
+        
+        ThemeHelper.applyDarkTheme(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         loadDashboard();
+        if (navigationView != null) {
+            navigationView.setCheckedItem(com.haui.devicemanagement.R.id.nav_admin_dashboard);
+        }
     }
 
     // ─── INIT ──────────────────────────────────────────────────────────────────
@@ -83,9 +94,25 @@ public class AdminDashboardActivity extends AppCompatActivity {
         cardDeviceManage  = findViewById(com.haui.devicemanagement.R.id.cardDeviceManage);
         cardUserManage    = findViewById(com.haui.devicemanagement.R.id.cardUserManage);
         cardReport        = findViewById(com.haui.devicemanagement.R.id.cardReport);
-        cardOverdue       = findViewById(com.haui.devicemanagement.R.id.cardOverdue);
+        cardOverdueWarning = findViewById(com.haui.devicemanagement.R.id.cardOverdueWarning);
+
+        drawerLayout      = findViewById(com.haui.devicemanagement.R.id.drawerLayout);
+        navigationView    = findViewById(com.haui.devicemanagement.R.id.navigationView);
 
         tvAdminName.setText(session.getFullName());
+
+        // Setup Nav Header Admin Info
+        if (navigationView != null && navigationView.getHeaderCount() > 0) {
+            android.view.View headerView = navigationView.getHeaderView(0);
+            TextView tvAdminHeaderName = headerView.findViewById(com.haui.devicemanagement.R.id.tvAdminHeaderName);
+            TextView tvAdminHeaderPermission = headerView.findViewById(com.haui.devicemanagement.R.id.tvAdminHeaderPermission);
+            if (tvAdminHeaderName != null) {
+                tvAdminHeaderName.setText(session.getFullName());
+            }
+            if (tvAdminHeaderPermission != null) {
+                tvAdminHeaderPermission.setText("Quyền: " + session.getPermissionLevel());
+            }
+        }
     }
 
     // ─── LOAD DASHBOARD DATA ───────────────────────────────────────────────────
@@ -130,7 +157,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             startActivity(new Intent(this, ReportActivity.class))
         );
 
-        cardOverdue.setOnClickListener(v ->
+        cardOverdueWarning.setOnClickListener(v ->
             startActivity(new Intent(this, OverdueActivity.class))
         );
 
@@ -138,15 +165,38 @@ public class AdminDashboardActivity extends AppCompatActivity {
             startActivity(new Intent(this, NotificationActivity.class))
         );
 
-        findViewById(com.haui.devicemanagement.R.id.btnLogout).setOnClickListener(v ->
-            confirmLogout()
-        );
+        findViewById(com.haui.devicemanagement.R.id.btnMenu).setOnClickListener(v -> {
+            if (drawerLayout != null) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == com.haui.devicemanagement.R.id.nav_admin_dashboard) {
+                    // Already here
+                } else if (itemId == com.haui.devicemanagement.R.id.nav_devices) {
+                    startActivity(new Intent(this, DeviceManageActivity.class));
+                } else if (itemId == com.haui.devicemanagement.R.id.nav_students) {
+                    startActivity(new Intent(this, UserManageActivity.class));
+                } else if (itemId == com.haui.devicemanagement.R.id.nav_reports) {
+                    startActivity(new Intent(this, ReportActivity.class));
+                } else if (itemId == com.haui.devicemanagement.R.id.nav_logout) {
+                    confirmLogout();
+                }
+                if (drawerLayout != null) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                return true;
+            });
+        }
     }
 
     // ─── LOGOUT ────────────────────────────────────────────────────────────────
 
     private void confirmLogout() {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
             .setTitle("Đăng xuất")
             .setMessage("Bạn có chắc muốn đăng xuất không?")
             .setPositiveButton("Đăng xuất", (d, w) -> {
@@ -157,10 +207,15 @@ public class AdminDashboardActivity extends AppCompatActivity {
             })
             .setNegativeButton("Hủy", null)
             .show();
+        ThemeHelper.applyDarkThemeToDialog(dialog);
     }
 
     @Override
     public void onBackPressed() {
-        confirmLogout();
+        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            confirmLogout();
+        }
     }
 }

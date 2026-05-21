@@ -40,6 +40,7 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
     private LinearLayout layoutBottomBar;
     private TextView tvSelectedCount;
     private MaterialButton btnContinue;
+    private com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigation;
 
     private String currentKeyword = "";
     private String currentCategory = "Tất cả";
@@ -63,6 +64,14 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
         loadData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (bottomNavigation != null) {
+            bottomNavigation.setSelectedItemId(R.id.nav_search);
+        }
+    }
+
     private void initViews() {
         searchView = findViewById(R.id.searchView);
         spinnerCategory = findViewById(R.id.spinnerCategory);
@@ -71,6 +80,38 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
         layoutBottomBar = findViewById(R.id.layoutBottomBar);
         tvSelectedCount = findViewById(R.id.tvSelectedCount);
         btnContinue = findViewById(R.id.btnContinue);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+
+        setupBottomNavigation();
+        if (getIntent().getBooleanExtra("IS_SELECTION_MODE", false)) {
+            bottomNavigation.setVisibility(View.GONE);
+        }
+    }
+
+    private void setupBottomNavigation() {
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_search) {
+                return true;
+            }
+
+            Intent intent = null;
+            if (itemId == R.id.nav_home) {
+                intent = new Intent(this, UserHomeActivity.class);
+            } else if (itemId == R.id.nav_history) {
+                intent = new Intent(this, HistoryActivity.class);
+            } else if (itemId == R.id.nav_profile) {
+                intent = new Intent(this, UserProfileActivity.class);
+            }
+
+            if (intent != null) {
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
+        });
     }
 
     private void setupToolbar() {
@@ -79,6 +120,12 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Tìm kiếm thiết bị");
+        }
+        if (toolbar != null && toolbar.getNavigationIcon() != null) {
+            androidx.core.graphics.drawable.DrawableCompat.setTint(
+                androidx.core.graphics.drawable.DrawableCompat.wrap(toolbar.getNavigationIcon()), 
+                android.graphics.Color.WHITE
+            );
         }
     }
 
@@ -101,9 +148,27 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
     private void setupSpinner() {
         // Danh sách danh mục tĩnh dựa theo spec
         String[] categories = {"Tất cả", "Laptop", "Projector", "Audio", "Tablet"};
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, categories);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+                com.haui.devicemanagement.R.layout.spinner_item, categories) {
+            @Override
+            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                if (view instanceof TextView) {
+                    ((TextView) view).setTextColor(android.graphics.Color.WHITE);
+                }
+                return view;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView, android.view.ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                if (view instanceof TextView) {
+                    ((TextView) view).setTextColor(android.graphics.Color.WHITE);
+                    ((TextView) view).setBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                return view;
+            }
+        };
+        spinnerAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
         spinnerCategory.setAdapter(spinnerAdapter);
 
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -119,6 +184,21 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
     }
 
     private void setupSearchView() {
+        // Style SearchView internal views for high contrast dark theme
+        SearchView.SearchAutoComplete searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        if (searchAutoComplete != null) {
+            searchAutoComplete.setTextColor(android.graphics.Color.WHITE);
+            searchAutoComplete.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+        }
+        android.widget.ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+        if (searchIcon != null) {
+            searchIcon.setImageTintList(android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE));
+        }
+        android.widget.ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        if (closeIcon != null) {
+            closeIcon.setImageTintList(android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE));
+        }
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -190,8 +270,12 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
     private void updateBottomBar(List<Integer> selectedDeviceIds) {
         if (selectedDeviceIds.isEmpty()) {
             layoutBottomBar.setVisibility(View.GONE);
+            if (!getIntent().getBooleanExtra("IS_SELECTION_MODE", false)) {
+                bottomNavigation.setVisibility(View.VISIBLE);
+            }
         } else {
             layoutBottomBar.setVisibility(View.VISIBLE);
+            bottomNavigation.setVisibility(View.GONE);
             tvSelectedCount.setText("Đã chọn: " + selectedDeviceIds.size() + " loại thiết bị");
         }
     }

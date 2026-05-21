@@ -34,6 +34,7 @@
         <activity android:name=".view.user.MyReturnActivity" android:exported="false" />
         <activity android:name=".view.user.TicketDetailActivity" android:exported="false" />
         <activity android:name=".view.user.UserProfileActivity" android:exported="false" />
+        <activity android:name=".view.user.HistoryActivity" android:exported="false" />
 
         <!-- Admin Screens -->
         <activity android:name=".view.admin.AdminDashboardActivity" android:exported="false" />

@@ -74,6 +74,91 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
             intent.putIntegerArrayListExtra("pre_selected_device_ids", new ArrayList<>(selectedDeviceIds));
             startActivityForResult(intent, REQUEST_SELECT_DEVICES);
         });
+
+        applyDarkTheme();
+    }
+
+    private void applyDarkTheme() {
+        android.view.View root = findViewById(R.id.rootLayout);
+        if (root != null) {
+            root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));
+        }
+        android.view.View toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setBackgroundColor(android.graphics.Color.parseColor("#161616"));
+            if (toolbar instanceof Toolbar && ((Toolbar) toolbar).getNavigationIcon() != null) {
+                androidx.core.graphics.drawable.DrawableCompat.setTint(
+                    androidx.core.graphics.drawable.DrawableCompat.wrap(((Toolbar) toolbar).getNavigationIcon()), 
+                    android.graphics.Color.WHITE
+                );
+            }
+        }
+        MaterialButton btnSelectDevices = findViewById(R.id.btnSelectDevices);
+        if (btnSelectDevices != null) {
+            btnSelectDevices.setTextColor(android.graphics.Color.parseColor("#3B82F6"));
+            btnSelectDevices.setIconTint(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#3B82F6")));
+        }
+        android.view.View layoutSubmit = findViewById(R.id.layoutSubmit);
+        if (layoutSubmit != null) {
+            layoutSubmit.setBackgroundColor(android.graphics.Color.parseColor("#121212"));
+        }
+
+        // Style the TextInputLayouts
+        com.google.android.material.textfield.TextInputLayout tilReason = findViewById(R.id.tilReason);
+        com.google.android.material.textfield.TextInputLayout layoutExpectedDate = findViewById(R.id.layoutExpectedDate);
+        int boxColor = android.graphics.Color.parseColor("#444446");
+        int hintColorVal = android.graphics.Color.parseColor("#8E8E8E");
+        android.content.res.ColorStateList stateList = android.content.res.ColorStateList.valueOf(hintColorVal);
+
+        if (tilReason != null) {
+            tilReason.setBoxStrokeColor(boxColor);
+            tilReason.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+            tilReason.setDefaultHintTextColor(stateList);
+            tilReason.setHintTextColor(stateList);
+        }
+        if (layoutExpectedDate != null) {
+            layoutExpectedDate.setBoxStrokeColor(boxColor);
+            layoutExpectedDate.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+            layoutExpectedDate.setDefaultHintTextColor(stateList);
+            layoutExpectedDate.setHintTextColor(stateList);
+            layoutExpectedDate.setEndIconTintList(android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE));
+        }
+
+        android.view.ViewGroup rootLayout = findViewById(R.id.rootLayout);
+        if (rootLayout != null) {
+            applyDarkThemeToViewGroup(rootLayout);
+        }
+    }
+
+    private void applyDarkThemeToViewGroup(android.view.ViewGroup viewGroup) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            android.view.View child = viewGroup.getChildAt(i);
+            if (child instanceof androidx.cardview.widget.CardView) {
+                ((androidx.cardview.widget.CardView) child).setCardBackgroundColor(
+                        android.graphics.Color.parseColor("#1C1C1E"));
+                applyDarkThemeToViewGroup((android.view.ViewGroup) child);
+            } else if (child instanceof android.widget.EditText) {
+                android.widget.EditText et = (android.widget.EditText) child;
+                et.setTextColor(android.graphics.Color.WHITE);
+                et.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+            } else if (child instanceof android.widget.TextView) {
+                android.widget.TextView tv = (android.widget.TextView) child;
+                if (tv.getId() == R.id.btnSubmit || tv.getId() == R.id.btnSelectDevices) {
+                    continue;
+                }
+                String text = tv.getText().toString();
+                if (text.contains("Thiết bị đăng ký mượn") || 
+                    text.contains("Thông tin chi tiết") || 
+                    text.contains("Ngày trả dự kiến") ||
+                    text.contains("Lý do mượn thiết bị")) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (child instanceof android.view.ViewGroup) {
+                applyDarkThemeToViewGroup((android.view.ViewGroup) child);
+            }
+        }
     }
 
     private void initViews() {

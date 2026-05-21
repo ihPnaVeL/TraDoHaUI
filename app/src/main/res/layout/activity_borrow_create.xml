@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -12,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back"
         app:titleTextColor="@color/white" />
 
     <ScrollView
@@ -28,6 +30,7 @@
 
             <!-- Card 1: Các thiết bị đã chọn -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardSelectedDevices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -97,6 +100,7 @@
 
             <!-- Card 2: Thông tin mượn -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardBorrowInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
@@ -124,6 +128,7 @@
 
                     <!-- Lý do mượn -->
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilReason"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -177,6 +182,7 @@
 
     <!-- Nút Submit -->
     <LinearLayout
+        android:id="@+id/layoutSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

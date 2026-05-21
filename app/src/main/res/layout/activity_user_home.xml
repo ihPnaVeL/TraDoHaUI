@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+    android:background="#121212">
 
     <!-- ── HEADER ── -->
     <LinearLayout
         android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_primary_gradient"
+        android:background="@drawable/bg_student_header"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:paddingTop="32dp">
+        android:paddingHorizontal="24dp"
+        android:paddingTop="36dp"
+        android:paddingBottom="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,410 +33,236 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Xin chào,"
-                    android:textColor="#CCffffff"
+                    android:textColor="#CCFFFFFF"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sinh viên"
+                    android:text="Lê Vân Phi"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Notification icon -->
+            <!-- Circular notification button -->
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btnNotification"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="@drawable/bg_logo_circle"
-                android:src="@android:drawable/ic_popup_reminder"
+                android:src="@drawable/ic_bell"
                 android:tint="@color/white"
                 android:contentDescription="Thông báo" />
-
-            <!-- Logout icon -->
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnLogout"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_logo_circle"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:tint="@color/white"
-                android:contentDescription="Đăng xuất" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- ── STAT CARDS ── -->
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutHeader"
+        android:layout_above="@id/bottomNavigation"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp">
 
-            <!-- Stats row 1 -->
+            <!-- Stats Grid -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="24dp"
                 android:orientation="horizontal">
 
-                <!-- Chờ duyệt -->
-                <androidx.cardview.widget.CardView
+                <!-- Pending Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardPending"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginEnd="6dp"
+                    android:layout_height="110dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFF3E0"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="3dp">
+                    android:layout_marginEnd="6dp"
+                    app:cardBackgroundColor="#231709"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#E67E22">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="12dp">
+                        android:padding="8dp">
 
                         <TextView
                             android:id="@+id/tvPendingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="@color/status_pending"
-                            android:textSize="28sp"
+                            android:textColor="#E67E22"
+                            android:textSize="32sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:text="Chờ duyệt"
-                            android:textColor="@color/status_pending"
-                            android:textSize="12sp" />
+                            android:textColor="#E67E22"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Đang mượn -->
-                <androidx.cardview.widget.CardView
+                <!-- Borrowed Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBorrowed"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="6dp"
+                    android:layout_height="110dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#E8F5E9"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="3dp">
+                    android:layout_marginHorizontal="6dp"
+                    app:cardBackgroundColor="#0A1F14"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#27AE60">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="12dp">
+                        android:padding="8dp">
 
                         <TextView
                             android:id="@+id/tvBorrowedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/status_borrowed"
-                            android:textSize="28sp"
+                            android:text="1"
+                            android:textColor="#27AE60"
+                            android:textSize="32sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:text="Đang mượn"
-                            android:textColor="@color/status_borrowed"
-                            android:textSize="12sp" />
+                            android:textColor="#27AE60"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Quá hạn -->
-                <androidx.cardview.widget.CardView
+                <!-- Overdue Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardOverdue"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="6dp"
+                    android:layout_height="110dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#FFEBEE"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="3dp">
+                    android:layout_marginStart="6dp"
+                    app:cardBackgroundColor="#2A0B0D"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#E74C3C">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="12dp">
+                        android:padding="8dp">
 
                         <TextView
                             android:id="@+id/tvOverdueCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="@color/status_overdue"
-                            android:textSize="28sp"
+                            android:textColor="#E74C3C"
+                            android:textSize="32sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:text="Quá hạn"
-                            android:textColor="@color/status_overdue"
-                            android:textSize="12sp" />
+                            android:textColor="#E74C3C"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
-            <!-- ── SECTION: THAO TÁC NHANH ── -->
+            <!-- Section Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="16dp"
                 android:text="Thao tác nhanh"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
+                android:textColor="#E0E0E0"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- Tạo phiếu mượn -->
+            <!-- Create Borrow Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateBorrow"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginBottom="10dp"
-                android:text="📋  Tạo phiếu mượn thiết bị"
+                android:layout_height="60dp"
+                android:layout_marginBottom="14dp"
+                android:text="TẠO PHIẾU MƯỢN THIẾT BỊ"
+                android:textColor="@color/white"
                 android:textSize="15sp"
-                app:backgroundTint="@color/primary"
-                app:cornerRadius="10dp"
-                app:icon="@null" />
+                android:textStyle="bold"
+                app:backgroundTint="#1962D1"
+                app:cornerRadius="14dp"
+                app:icon="@drawable/ic_clipboard"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconTint="@color/white" />
 
-            <!-- Tạo phiếu trả -->
+            <!-- Create Return Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateReturn"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginBottom="10dp"
-                android:text="↩️  Tạo phiếu trả thiết bị"
-                android:textSize="15sp"
-                app:backgroundTint="#2E7D32"
-                app:cornerRadius="10dp" />
-
-            <!-- ── SECTION: LỊCH SỬ ── -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"
-                android:text="Lịch sử"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <!-- Grid: Lịch sử mượn + Lịch sử trả -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardMyBorrow"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="3dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="📋"
-                            android:textSize="22sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Lịch sử mượn"
-                            android:textColor="@color/text_primary"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardMyReturn"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="3dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="↩️"
-                            android:textSize="22sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Lịch sử trả"
-                            android:textColor="@color/text_primary"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <!-- Tìm thiết bị -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardSearchDevice"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:text="🔍"
-                        android:textSize="22sp" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tìm kiếm thiết bị"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Xem thiết bị còn khả dụng"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="›"
-                        android:textColor="@color/grey"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Hồ sơ cá nhân -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardProfile"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="60dp"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:text="👤"
-                        android:textSize="22sp" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hồ sơ cá nhân"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Xem và cập nhật thông tin"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="›"
-                        android:textColor="@color/grey"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                android:text="TẠO PHIẾU TRẢ THIẾT BỊ"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="#2E7D32"
+                app:cornerRadius="14dp"
+                app:icon="@drawable/ic_return"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconTint="@color/white" />
 
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="#161616"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="@color/bottom_nav_color_state"
+        app:itemTextColor="@color/bottom_nav_color_state"
+        app:labelVisibilityMode="labeled"
+        android:elevation="8dp" />
+
+</RelativeLayout>

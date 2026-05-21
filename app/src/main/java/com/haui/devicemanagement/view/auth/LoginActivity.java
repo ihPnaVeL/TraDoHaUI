@@ -13,6 +13,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.presenter.AuthPresenter;
 import com.haui.devicemanagement.util.Constants;
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements AuthPresenter.Lo
         initViews();
         setupTabListener();
         setupLoginButton();
+        applyDynamicTheme(true);
     }
 
     // ─── INIT ──────────────────────────────────────────────────────────────────
@@ -87,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements AuthPresenter.Lo
             public void onTabSelected(TabLayout.Tab tab) {
                 isAdminMode = (tab.getPosition() == 1);
                 updateFormForMode();
+                applyDynamicTheme(true);
                 clearError();
             }
 
@@ -189,5 +192,105 @@ public class LoginActivity extends AppCompatActivity implements AuthPresenter.Lo
     public void onBackPressed() {
         // Không cho phép back từ màn hình login
         finishAffinity();
+    }
+
+    private void applyDynamicTheme(boolean isDark) {
+        View root = findViewById(R.id.rootScrollView);
+        View cardForm = findViewById(R.id.cardLoginForm);
+        TextView tvPasswordLabel = findViewById(R.id.tvPasswordLabel);
+        TextView tvFooter = findViewById(R.id.tvFooter);
+        TextInputLayout tilUsername = findViewById(R.id.tilUsername);
+        TextInputLayout tilPassword = findViewById(R.id.tilPassword);
+
+        if (isDark) {
+            if (root != null) {
+                root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));
+            }
+            if (tabLayout != null) {
+                tabLayout.setTabTextColors(android.graphics.Color.parseColor("#8E8E8E"), android.graphics.Color.WHITE);
+            }
+            if (cardForm != null && cardForm instanceof androidx.cardview.widget.CardView) {
+                ((androidx.cardview.widget.CardView) cardForm).setCardBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
+            }
+            if (tvInputLabel != null) {
+                tvInputLabel.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+            }
+            if (tvPasswordLabel != null) {
+                tvPasswordLabel.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+            }
+            if (etUsername != null) {
+                etUsername.setTextColor(android.graphics.Color.WHITE);
+                etUsername.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+            }
+            if (etPassword != null) {
+                etPassword.setTextColor(android.graphics.Color.WHITE);
+                etPassword.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+            }
+            if (tvFooter != null) {
+                tvFooter.setTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+            }
+            
+            int boxColor = android.graphics.Color.parseColor("#444446");
+            int hintColorVal = android.graphics.Color.parseColor("#8E8E8E");
+            android.content.res.ColorStateList stateList = android.content.res.ColorStateList.valueOf(hintColorVal);
+
+            if (tilUsername != null) {
+                tilUsername.setBoxStrokeColor(boxColor);
+                tilUsername.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+                tilUsername.setDefaultHintTextColor(stateList);
+                tilUsername.setHintTextColor(stateList);
+            }
+            if (tilPassword != null) {
+                tilPassword.setBoxStrokeColor(boxColor);
+                tilPassword.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+                tilPassword.setDefaultHintTextColor(stateList);
+                tilPassword.setHintTextColor(stateList);
+            }
+        } else {
+            // Light theme
+            if (root != null) {
+                root.setBackgroundColor(getResources().getColor(R.color.background));
+            }
+            if (tabLayout != null) {
+                tabLayout.setTabTextColors(getResources().getColor(R.color.primary), android.graphics.Color.WHITE);
+            }
+            if (cardForm != null && cardForm instanceof androidx.cardview.widget.CardView) {
+                ((androidx.cardview.widget.CardView) cardForm).setCardBackgroundColor(getResources().getColor(R.color.white));
+            }
+            if (tvInputLabel != null) {
+                tvInputLabel.setTextColor(getResources().getColor(R.color.text_secondary));
+            }
+            if (tvPasswordLabel != null) {
+                tvPasswordLabel.setTextColor(getResources().getColor(R.color.text_secondary));
+            }
+            if (etUsername != null) {
+                etUsername.setTextColor(getResources().getColor(R.color.text_primary));
+                etUsername.setHintTextColor(getResources().getColor(R.color.text_secondary));
+            }
+            if (etPassword != null) {
+                etPassword.setTextColor(getResources().getColor(R.color.text_primary));
+                etPassword.setHintTextColor(getResources().getColor(R.color.text_secondary));
+            }
+            if (tvFooter != null) {
+                tvFooter.setTextColor(getResources().getColor(R.color.grey));
+            }
+            
+            int boxColor = getResources().getColor(R.color.divider);
+            int hintColorVal = getResources().getColor(R.color.text_secondary);
+            android.content.res.ColorStateList stateList = android.content.res.ColorStateList.valueOf(hintColorVal);
+
+            if (tilUsername != null) {
+                tilUsername.setBoxStrokeColor(boxColor);
+                tilUsername.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.primary)));
+                tilUsername.setDefaultHintTextColor(stateList);
+                tilUsername.setHintTextColor(stateList);
+            }
+            if (tilPassword != null) {
+                tilPassword.setBoxStrokeColor(boxColor);
+                tilPassword.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.primary)));
+                tilPassword.setDefaultHintTextColor(stateList);
+                tilPassword.setHintTextColor(stateList);
+            }
+        }
     }
 }

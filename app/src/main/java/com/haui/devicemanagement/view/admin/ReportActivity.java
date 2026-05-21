@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.presenter.ReportPresenter;
+import com.haui.devicemanagement.util.ThemeHelper;
 
 import java.util.Collections;
 import java.util.Map;
@@ -30,6 +31,15 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
 
     private ReportPresenter presenter;
 
+    // Fields to store data for export
+    private int mTotalBorrowed;
+    private int mTotalMaintenance;
+    private int mTotalLost;
+    private int mPendingBorrow;
+    private int mPendingReturn;
+    private Map<String, Integer> mBorrowByMonth = Collections.emptyMap();
+    private Map<String, Integer> mReturnByMonth = Collections.emptyMap();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +48,8 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
         initViews();
         presenter = new ReportPresenter(DatabaseHelper.getInstance(this));
         presenter.loadReport(this);
+
+        ThemeHelper.applyDarkTheme(this);
     }
 
     private void initViews() {
@@ -54,6 +66,8 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
         tvPendingBorrow = findViewById(R.id.tvPendingBorrow);
         tvPendingReturn = findViewById(R.id.tvPendingReturn);
         containerRows = findViewById(R.id.containerRows);
+
+        findViewById(R.id.btnExportExcel).setOnClickListener(v -> exportToExcel());
     }
 
     @Override
@@ -61,6 +75,15 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
                                int totalBorrowed, int totalMaintenance, int totalLost,
                                int pendingBorrow, int pendingReturn) {
         
+        // Save values in memory for export
+        this.mTotalBorrowed = totalBorrowed;
+        this.mTotalMaintenance = totalMaintenance;
+        this.mTotalLost = totalLost;
+        this.mPendingBorrow = pendingBorrow;
+        this.mPendingReturn = pendingReturn;
+        this.mBorrowByMonth = borrowByMonth;
+        this.mReturnByMonth = returnByMonth;
+
         tvTotalBorrowed.setText(String.valueOf(totalBorrowed));
         tvTotalMaintenance.setText(String.valueOf(totalMaintenance));
         tvTotalLost.setText(String.valueOf(totalLost));
@@ -88,6 +111,8 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
             int rCount = returnByMonth.containsKey(month) ? returnByMonth.get(month) : 0;
             addStatsRow(month, bCount, rCount);
         }
+
+        ThemeHelper.applyDarkTheme(this);
     }
 
     private void addStatsRow(String month, int borrowCount, int returnCount) {
@@ -126,6 +151,59 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
         divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
         divider.setBackgroundColor(getResources().getColor(R.color.divider));
         containerRows.addView(divider);
+    }
+
+    private void exportToExcel() {
+        try {
+            java.io.File dir = getExternalFilesDir(android.os.Environment.DIRECTORY_DOWNLOADS);
+            if (dir == null) {
+                Toast.makeText(this, "Không thể truy cập thư mục lưu trữ", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String fileName = "BaoCaoThongKe_" + System.currentTimeMillis() + ".csv";
+            java.io.File file = new java.io.File(dir, fileName);
+
+            java.io.FileOutputStream fos = new java.io.FileOutputStream(file);
+            java.io.OutputStreamWriter osw = new java.io.OutputStreamWriter(fos, "UTF-8");
+
+            // Write UTF-8 BOM (0xEF, 0xBB, 0xBF) to allow correct Vietnamese rendering in Excel
+            osw.write('\ufeff');
+
+            // Header info
+            osw.write("BÁO CÁO THỐNG KÊ THIẾT BỊ VÀ PHIẾU\n");
+            osw.write("Ngày xuất báo cáo," + com.haui.devicemanagement.util.DateUtils.getCurrentDate() + "\n\n");
+
+            // General stats
+            osw.write("TỔNG QUAN THIẾT BỊ VÀ PHIẾU\n");
+            osw.write("Chỉ số,Số lượng\n");
+            osw.write("Đang được mượn," + mTotalBorrowed + "\n");
+            osw.write("Đang bảo trì," + mTotalMaintenance + "\n");
+            osw.write("Bị mất," + mTotalLost + "\n");
+            osw.write("Chờ duyệt mượn," + mPendingBorrow + "\n");
+            osw.write("Chờ duyệt trả," + mPendingReturn + "\n\n");
+
+            // Monthly stats
+            osw.write("THỐNG KÊ HOẠT ĐỘNG THEO THÁNG\n");
+            osw.write("Tháng,Số phiếu mượn,Số phiếu trả\n");
+
+            Set<String> allMonths = new TreeSet<>(Collections.reverseOrder());
+            allMonths.addAll(mBorrowByMonth.keySet());
+            allMonths.addAll(mReturnByMonth.keySet());
+
+            for (String month : allMonths) {
+                int bCount = mBorrowByMonth.containsKey(month) ? mBorrowByMonth.get(month) : 0;
+                int rCount = mReturnByMonth.containsKey(month) ? mReturnByMonth.get(month) : 0;
+                osw.write(month + "," + bCount + "," + rCount + "\n");
+            }
+
+            osw.flush();
+            osw.close();
+            fos.close();
+
+            Toast.makeText(this, "Xuất báo cáo thành công!\nĐường dẫn: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Lỗi khi xuất file: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

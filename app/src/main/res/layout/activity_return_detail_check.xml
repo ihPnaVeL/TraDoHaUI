@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#121212"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
+        android:background="#1A1A1A"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleTextColor="@color/white" />
 
@@ -44,7 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mã phiếu trả: RT-20260521-001"
-                        android:textColor="@color/primary"
+                        android:textColor="#5B9EF0"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -84,7 +84,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="Các thiết bị cần kiểm tra:"
-                android:textColor="@color/text_secondary"
+                android:textColor="#8E8E8E"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="#1C1C1E"
         android:elevation="8dp"
         android:padding="16dp">
 

@@ -35,10 +35,7 @@ public class UserHomeActivity extends AppCompatActivity {
     private TextView       tvOverdueCount;
     private MaterialButton btnCreateBorrow;
     private MaterialButton btnCreateReturn;
-    private CardView       cardMyBorrow;
-    private CardView       cardMyReturn;
-    private CardView       cardSearchDevice;
-    private CardView       cardProfile;
+    private com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigation;
 
     private SessionManager  session;
     private BorrowTicketDao borrowTicketDao;
@@ -59,6 +56,9 @@ public class UserHomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadDashboard();
+        if (bottomNavigation != null) {
+            bottomNavigation.setSelectedItemId(com.haui.devicemanagement.R.id.nav_home);
+        }
     }
 
     // ─── INIT ──────────────────────────────────────────────────────────────────
@@ -70,12 +70,10 @@ public class UserHomeActivity extends AppCompatActivity {
         tvOverdueCount  = findViewById(com.haui.devicemanagement.R.id.tvOverdueCount);
         btnCreateBorrow = findViewById(com.haui.devicemanagement.R.id.btnCreateBorrow);
         btnCreateReturn = findViewById(com.haui.devicemanagement.R.id.btnCreateReturn);
-        cardMyBorrow    = findViewById(com.haui.devicemanagement.R.id.cardMyBorrow);
-        cardMyReturn    = findViewById(com.haui.devicemanagement.R.id.cardMyReturn);
-        cardSearchDevice = findViewById(com.haui.devicemanagement.R.id.cardSearchDevice);
-        cardProfile     = findViewById(com.haui.devicemanagement.R.id.cardProfile);
+        bottomNavigation = findViewById(com.haui.devicemanagement.R.id.bottomNavigation);
 
         tvUserName.setText(session.getFullName());
+        setupBottomNavigation();
     }
 
     // ─── LOAD DATA ─────────────────────────────────────────────────────────────
@@ -109,35 +107,36 @@ public class UserHomeActivity extends AppCompatActivity {
             startActivity(new Intent(this, ReturnCreateActivity.class))
         );
 
-        // Lịch sử mượn
-        cardMyBorrow.setOnClickListener(v ->
-            startActivity(new Intent(this, MyBorrowActivity.class))
-        );
-
-        // Lịch sử trả
-        cardMyReturn.setOnClickListener(v ->
-            startActivity(new Intent(this, MyReturnActivity.class))
-        );
-
-        // Tìm thiết bị
-        cardSearchDevice.setOnClickListener(v ->
-            startActivity(new Intent(this, DeviceSearchActivity.class))
-        );
-
-        // Hồ sơ cá nhân
-        cardProfile.setOnClickListener(v ->
-            startActivity(new Intent(this, UserProfileActivity.class))
-        );
-
         // Thông báo
         findViewById(com.haui.devicemanagement.R.id.btnNotification).setOnClickListener(v ->
             startActivity(new Intent(this, NotificationActivity.class))
         );
+    }
 
-        // Đăng xuất
-        findViewById(com.haui.devicemanagement.R.id.btnLogout).setOnClickListener(v ->
-            confirmLogout()
-        );
+    private void setupBottomNavigation() {
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == com.haui.devicemanagement.R.id.nav_home) {
+                return true;
+            }
+
+            Intent intent = null;
+            if (itemId == com.haui.devicemanagement.R.id.nav_search) {
+                intent = new Intent(this, DeviceSearchActivity.class);
+            } else if (itemId == com.haui.devicemanagement.R.id.nav_history) {
+                intent = new Intent(this, HistoryActivity.class);
+            } else if (itemId == com.haui.devicemanagement.R.id.nav_profile) {
+                intent = new Intent(this, UserProfileActivity.class);
+            }
+
+            if (intent != null) {
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
+        });
     }
 
     // ─── LOGOUT ────────────────────────────────────────────────────────────────

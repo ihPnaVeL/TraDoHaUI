@@ -25,6 +25,7 @@ import com.haui.devicemanagement.presenter.ReturnPresenter;
 import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.DateUtils;
 import com.haui.devicemanagement.util.SessionManager;
+import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.ReturnItemAdapter;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class ReturnDetailCheckActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_return_detail_check);
+        ThemeHelper.applyDarkTheme(this);
 
         sessionManager = new SessionManager(this);
         presenter = new ReturnPresenter(DatabaseHelper.getInstance(this));
@@ -214,7 +216,9 @@ public class ReturnDetailCheckActivity extends AppCompatActivity
         });
 
         builder.setNegativeButton("Hủy", null);
-        builder.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        ThemeHelper.applyDarkThemeToDialog(dialog);
     }
 
     @Override

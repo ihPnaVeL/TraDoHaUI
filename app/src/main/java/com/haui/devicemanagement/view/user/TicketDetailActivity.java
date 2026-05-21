@@ -26,6 +26,7 @@ import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.DateUtils;
 import com.haui.devicemanagement.view.adapter.BorrowItemAdapter;
 import com.haui.devicemanagement.view.adapter.ReturnItemAdapter;
+import com.haui.devicemanagement.util.SessionManager;
 
 import java.util.List;
 
@@ -71,6 +72,9 @@ public class TicketDetailActivity extends AppCompatActivity {
         initViews();
         setupToolbar();
         setupRecyclerView();
+        
+        applyDarkTheme();
+        
         loadData();
     }
 
@@ -283,5 +287,54 @@ public class TicketDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void applyDarkTheme() {
+        View root = findViewById(R.id.rootLayout);
+        if (root != null) {
+            root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));
+        }
+        View toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setBackgroundColor(android.graphics.Color.parseColor("#161616"));
+            if (toolbar instanceof Toolbar && ((Toolbar) toolbar).getNavigationIcon() != null) {
+                androidx.core.graphics.drawable.DrawableCompat.setTint(
+                    androidx.core.graphics.drawable.DrawableCompat.wrap(((Toolbar) toolbar).getNavigationIcon()), 
+                    android.graphics.Color.WHITE
+                );
+            }
+        }
+        androidx.cardview.widget.CardView cardGeneralInfo = findViewById(R.id.cardGeneralInfo);
+        if (cardGeneralInfo != null) {
+            cardGeneralInfo.setCardBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
+            applyDarkThemeToViewGroup(cardGeneralInfo);
+        }
+        View divider = findViewById(R.id.divider);
+        if (divider != null) {
+            divider.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2E"));
+        }
+        TextView tvTitleDeviceList = findViewById(R.id.tvTitleDeviceList);
+        if (tvTitleDeviceList != null) {
+            tvTitleDeviceList.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+        }
+    }
+
+    private void applyDarkThemeToViewGroup(android.view.ViewGroup viewGroup) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            android.view.View child = viewGroup.getChildAt(i);
+            if (child instanceof TextView) {
+                TextView tv = (TextView) child;
+                int id = tv.getId();
+                if (id == R.id.tvTicketCode || id == R.id.tvStudentName || id == R.id.tvDateTargetValue || id == R.id.tvDateCreated || id == R.id.tvHandlerValue || id == R.id.tvNoteValue) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else if (id == R.id.tvStatusBadge) {
+                    // Trạng thái đã được tô màu riêng ở bindBorrowStatus/bindReturnStatus
+                } else {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (child instanceof android.view.ViewGroup) {
+                applyDarkThemeToViewGroup((android.view.ViewGroup) child);
+            }
+        }
     }
 }

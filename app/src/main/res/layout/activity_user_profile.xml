@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+    android:background="@color/background">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,7 +17,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/bottomNavigation">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,6 +29,7 @@
 
             <!-- Profile Info Card -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardProfileInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
@@ -105,6 +108,7 @@
 
             <!-- Contact Settings Card -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardContactSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
@@ -128,6 +132,7 @@
 
                     <!-- Email Input -->
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilEmail"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -136,7 +141,7 @@
                         app:startIconDrawable="@android:drawable/sym_action_email">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etEmail"
+                             android:id="@+id/etEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress" />
@@ -144,6 +149,7 @@
 
                     <!-- Phone Input -->
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPhone"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -182,6 +188,32 @@
                 app:cornerRadius="8dp"
                 app:strokeColor="@color/primary" />
 
+            <!-- Logout Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:text="Đăng xuất"
+                android:textColor="@color/error"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/error" />
+
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="#161616"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="@color/bottom_nav_color_state"
+        app:itemTextColor="@color/bottom_nav_color_state"
+        app:labelVisibilityMode="labeled"
+        android:elevation="8dp" />
+
+</RelativeLayout>

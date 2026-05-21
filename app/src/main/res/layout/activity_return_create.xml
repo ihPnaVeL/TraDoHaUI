@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -12,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back"
         app:titleTextColor="@color/white" />
 
     <ScrollView
@@ -28,6 +30,7 @@
 
             <!-- Chọn phiếu mượn -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardSelectBorrowTicket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -60,7 +63,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dropdown"
+                        android:background="@drawable/bg_spinner"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -106,6 +114,7 @@
 
             <!-- Card 3: Thông tin trả -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardReturnInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
@@ -133,6 +142,7 @@
 
                     <!-- Ghi chú trả -->
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilReturnNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -157,6 +167,7 @@
 
     <!-- Nút Submit -->
     <LinearLayout
+        android:id="@+id/layoutSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

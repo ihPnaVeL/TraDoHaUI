@@ -15,6 +15,7 @@ import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.dao.DeviceDao;
 import com.haui.devicemanagement.data.entity.BorrowItem;
 import com.haui.devicemanagement.data.entity.Device;
+import com.haui.devicemanagement.util.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,6 +145,37 @@ public class BorrowItemAdapter extends RecyclerView.Adapter<BorrowItemAdapter.Vi
                     assignListener.onAssignClick(item, reqDeviceId);
                 }
             });
+
+            SessionManager session = new SessionManager(itemView.getContext());
+            if (true) {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                applyDarkThemeToItem(itemView);
+            }
+        }
+
+        private void applyDarkThemeToItem(View view) {
+            if (view.getId() == R.id.layoutPhysicalDetails) {
+                view.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2E"));
+            }
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvDeviceName) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else if (id == R.id.tvUnassignedWarning) {
+                    // Keep red warning
+                } else {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
         }
 
         private int parseDeviceIdFromNote(String note) {

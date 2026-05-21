@@ -22,6 +22,7 @@ import com.haui.devicemanagement.data.dao.AdminDao;
 import com.haui.devicemanagement.data.entity.Admin;
 import com.haui.devicemanagement.util.DateUtils;
 import com.haui.devicemanagement.util.SessionManager;
+import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.UserAdapter;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class AdminManageActivity extends AppCompatActivity implements UserAdapte
         }
 
         setContentView(R.layout.activity_admin_manage);
+        ThemeHelper.applyDarkTheme(this);
 
         adminDao = new AdminDao(DatabaseHelper.getInstance(this));
 
@@ -100,8 +102,8 @@ public class AdminManageActivity extends AppCompatActivity implements UserAdapte
 
         // Populate Spinner
         String[] roles = {"staff", "manager"};
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roles);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, com.haui.devicemanagement.R.layout.spinner_item, roles);
+        spinnerAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
         spPermissionLevel.setAdapter(spinnerAdapter);
 
         boolean isEdit = admin != null;
@@ -162,6 +164,7 @@ public class AdminManageActivity extends AppCompatActivity implements UserAdapte
             });
         });
         alertDialog.show();
+        ThemeHelper.applyDarkThemeToDialog(alertDialog);
     }
 
     @Override

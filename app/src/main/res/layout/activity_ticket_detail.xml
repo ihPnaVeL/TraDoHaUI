@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -12,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back"
         app:titleTextColor="@color/white" />
 
     <ScrollView
@@ -27,6 +29,7 @@
 
             <!-- Card 1: Thông tin chung -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardGeneralInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -70,6 +73,7 @@
                     </LinearLayout>
 
                     <View
+                        android:id="@+id/divider"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="10dp"
@@ -209,6 +213,7 @@
 
             <!-- Card 2: Danh sách thiết bị -->
             <TextView
+                android:id="@+id/tvTitleDeviceList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"

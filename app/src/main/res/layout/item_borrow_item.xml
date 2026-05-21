@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#252527">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên loại thiết bị"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="Ghi chú: Yêu cầu Laptop"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="#8E8E8E"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -52,12 +52,14 @@
             <!-- Nút Gán thiết bị (dành cho Admin) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAssign"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:text="Gán TB"
                 android:textSize="12sp"
-                android:textColor="@color/primary"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:backgroundTint="#27AE60"
+                app:cornerRadius="8dp"
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -68,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#05000000"
+            android:background="#28FFFFFF"
             android:orientation="vertical"
             android:padding="8dp"
             android:visibility="visible">
@@ -84,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Mã TS: HAU-LAP-001"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -94,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Serial: DELL001"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -111,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tình trạng: Tốt"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="#8E8E8E"
                     android:textSize="12sp" />
 
                 <TextView
@@ -120,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Phụ kiện: Sạc, túi"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="#8E8E8E"
                     android:textSize="12sp" />
 
             </LinearLayout>

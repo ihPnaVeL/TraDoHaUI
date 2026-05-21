@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.entity.Device;
+import com.haui.devicemanagement.view.user.DeviceSearchActivity;
+import com.haui.devicemanagement.view.user.BorrowCreateActivity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -102,20 +104,42 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             tvAvailableCount.setText(String.valueOf(device.getAvailableCount()));
             tvCategory.setText(device.getCategory());
 
+            boolean isDark = true;
+            if (isDark) {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                applyDarkThemeToItem(itemView);
+            }
+
             if (isSelectionMode) {
                 btnSelect.setVisibility(View.VISIBLE);
                 // Vô hiệu hóa chọn nếu hết thiết bị vật lý khả dụng
                 if (device.getAvailableCount() <= 0) {
                     btnSelect.setEnabled(false);
                     btnSelect.setText("Hết");
+                    if (isDark) {
+                        btnSelect.setTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+                        btnSelect.setStrokeColor(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#444446")));
+                    }
                 } else {
                     btnSelect.setEnabled(true);
                     if (selectedIds.contains(device.getId())) {
                         btnSelect.setText("Đã chọn");
                         btnSelect.setIconResource(android.R.drawable.checkbox_on_background);
+                        if (isDark) {
+                            btnSelect.setTextColor(android.graphics.Color.parseColor("#1962D1"));
+                            btnSelect.setStrokeColor(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+                            btnSelect.setIconTint(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+                        }
                     } else {
                         btnSelect.setText("Chọn mượn");
                         btnSelect.setIcon(null);
+                        if (isDark) {
+                            btnSelect.setTextColor(android.graphics.Color.WHITE);
+                            btnSelect.setStrokeColor(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#444446")));
+                        }
                     }
                 }
 
@@ -140,6 +164,32 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                     listener.onDeviceClick(device);
                 }
             });
+        }
+
+        private void applyDarkThemeToItem(View view) {
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.btnSelect) {
+                    return;
+                }
+                if (id == R.id.tvDeviceName) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else if (id == R.id.tvCategory) {
+                    tv.setTextColor(android.graphics.Color.parseColor("#90CAF9"));
+                    tv.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                            android.graphics.Color.parseColor("#1A90CAF9")));
+                } else if (id == R.id.tvAvailableCount) {
+                    // Do not change white text inside the round green badge
+                } else {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
         }
     }
 }

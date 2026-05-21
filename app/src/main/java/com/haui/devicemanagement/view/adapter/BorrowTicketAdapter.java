@@ -86,6 +86,14 @@ public class BorrowTicketAdapter extends RecyclerView.Adapter<BorrowTicketAdapte
             tvCreatedAt.setText(DateUtils.formatDisplayDateTime(ticket.getCreatedAt()));
             tvExpectedReturnDate.setText(DateUtils.formatDisplayDate(ticket.getExpectedReturnDate()));
 
+            if (true) {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                applyDarkThemeToItem(itemView);
+            }
+
             if (isAdminView) {
                 layoutUserDetails.setVisibility(View.VISIBLE);
                 String details = ticket.getUserFullName() != null ? 
@@ -103,6 +111,25 @@ public class BorrowTicketAdapter extends RecyclerView.Adapter<BorrowTicketAdapte
                     listener.onTicketClick(ticket);
                 }
             });
+        }
+
+        private void applyDarkThemeToItem(View view) {
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvTicketCode || id == R.id.tvStudentName || id == R.id.tvExpectedReturnDate || id == R.id.tvCreatedAt) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else if (id == R.id.tvStatusBadge) {
+                    // Do not modify status badge text colors
+                } else {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
         }
 
         private void bindStatus(String status) {

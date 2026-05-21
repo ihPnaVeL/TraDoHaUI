@@ -21,6 +21,7 @@ import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.dao.UserDao;
 import com.haui.devicemanagement.data.entity.User;
 import com.haui.devicemanagement.util.DateUtils;
+import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.UserAdapter;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class UserManageActivity extends AppCompatActivity implements UserAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_manage);
+        ThemeHelper.applyDarkTheme(this);
 
         userDao = new UserDao(DatabaseHelper.getInstance(this));
 
@@ -173,6 +175,7 @@ public class UserManageActivity extends AppCompatActivity implements UserAdapter
             });
         });
         alertDialog.show();
+        ThemeHelper.applyDarkThemeToDialog(alertDialog);
     }
 
     @Override

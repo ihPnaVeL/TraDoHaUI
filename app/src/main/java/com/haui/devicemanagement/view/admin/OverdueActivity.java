@@ -18,6 +18,7 @@ import com.haui.devicemanagement.data.dao.NotificationDao;
 import com.haui.devicemanagement.data.entity.BorrowTicket;
 import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.DateUtils;
+import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.BorrowTicketAdapter;
 import com.haui.devicemanagement.view.user.TicketDetailActivity;
 
@@ -36,6 +37,7 @@ public class OverdueActivity extends AppCompatActivity implements BorrowTicketAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overdue);
+        ThemeHelper.applyDarkTheme(this);
 
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
         borrowTicketDao = new BorrowTicketDao(dbHelper);

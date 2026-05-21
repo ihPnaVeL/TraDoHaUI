@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#252527">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên thiết bị"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="Mã TS: HAU-LAP-001 | Serial: DELL001"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="#8E8E8E"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -50,12 +50,14 @@
             <!-- Nút Kiểm tra (dành cho Admin) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCheck"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:text="Kiểm tra"
                 android:textSize="12sp"
-                android:textColor="@color/primary"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:backgroundTint="#1E6FD9"
+                app:cornerRadius="8dp"
                 android:visibility="gone" />
 
             <!-- Trạng thái Đã duyệt / Chưa duyệt -->
@@ -79,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#05000000"
+            android:background="#28FFFFFF"
             android:orientation="vertical"
             android:padding="8dp"
             android:visibility="gone">
@@ -95,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tình trạng nhận: Tốt"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp" />
 
                 <TextView
@@ -104,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Phụ kiện trả: Đầy đủ"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -115,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Ghi chú hỏng/mất: Không"
-                android:textColor="@color/text_secondary"
+                android:textColor="#8E8E8E"
                 android:textSize="12sp" />
 
             <TextView

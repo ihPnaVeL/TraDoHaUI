@@ -24,6 +24,7 @@ import com.haui.devicemanagement.data.entity.DeviceDetail;
 import com.haui.devicemanagement.presenter.BorrowPresenter;
 import com.haui.devicemanagement.presenter.DevicePresenter;
 import com.haui.devicemanagement.util.SessionManager;
+import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.BorrowItemAdapter;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class AssignDeviceActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_device);
+        ThemeHelper.applyDarkTheme(this);
 
         ticketId = getIntent().getIntExtra("ticket_id", -1);
         if (ticketId == -1) {
@@ -136,8 +138,8 @@ public class AssignDeviceActivity extends AppCompatActivity
         }
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, displayStrings);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                com.haui.devicemanagement.R.layout.spinner_item, displayStrings);
+        spinnerAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
         builder.setView(view);
@@ -169,7 +171,9 @@ public class AssignDeviceActivity extends AppCompatActivity
         });
 
         builder.setNegativeButton("Hủy", null);
-        builder.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        ThemeHelper.applyDarkThemeToDialog(dialog);
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.entity.ReturnItem;
 import com.haui.devicemanagement.util.Constants;
+import com.haui.devicemanagement.util.SessionManager;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -144,6 +145,37 @@ public class ReturnItemAdapter extends RecyclerView.Adapter<ReturnItemAdapter.Vi
                     });
                 } else {
                     btnCheck.setVisibility(View.GONE);
+                }
+            }
+
+            SessionManager session = new SessionManager(itemView.getContext());
+            if (true) {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                applyDarkThemeToItem(itemView);
+            }
+        }
+
+        private void applyDarkThemeToItem(View view) {
+            if (view.getId() == R.id.layoutInspectionDetails) {
+                view.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2E"));
+            }
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvDeviceName) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else if (id == R.id.tvCheckStatus) {
+                    // Keep status text colors
+                } else {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyDarkThemeToItem(vg.getChildAt(i));
                 }
             }
         }

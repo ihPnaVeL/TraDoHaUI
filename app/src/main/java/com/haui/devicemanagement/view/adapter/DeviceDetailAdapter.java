@@ -80,6 +80,7 @@ public class DeviceDetailAdapter extends RecyclerView.Adapter<DeviceDetailAdapte
         }
 
         public void bind(DeviceDetail detail) {
+            com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(itemView);
             tvAssetCode.setText("Mã TS: " + detail.getAssetCode());
             tvDeviceName.setText(detail.getDeviceName() != null ? detail.getDeviceName() : "Loại thiết bị: #" + detail.getDeviceId());
             tvSerial.setText("Serial: " + (detail.getSerialNumber() != null && !detail.getSerialNumber().isEmpty() ? detail.getSerialNumber() : "N/A"));
@@ -119,7 +120,7 @@ public class DeviceDetailAdapter extends RecyclerView.Adapter<DeviceDetailAdapte
             }
             GradientDrawable condShape = new GradientDrawable();
             condShape.setCornerRadius(12f);
-            condShape.setColor(itemView.getContext().getResources().getColor(R.color.grey_light));
+            condShape.setColor(android.graphics.Color.parseColor("#2C2C2E"));
             tvCondition.setBackground(condShape);
             tvCondition.setTextColor(condColor);
 

@@ -78,18 +78,47 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvMessage.setText(notif.getMessage());
             tvTime.setText(notif.getCreatedAt());
 
-            boolean isRead = notif.isRead();
-            if (isRead) {
-                viewUnreadIndicator.setVisibility(View.GONE);
-                tvTitle.setTypeface(null, Typeface.NORMAL);
-                tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
-                layoutContainer.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.white));
+            com.haui.devicemanagement.util.SessionManager session = new com.haui.devicemanagement.util.SessionManager(itemView.getContext());
+            boolean isDark = true;
+
+            if (isDark) {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                tvMessage.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                tvTime.setTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+                
+                if (notif.isRead()) {
+                    viewUnreadIndicator.setVisibility(View.GONE);
+                    tvTitle.setTypeface(null, Typeface.NORMAL);
+                    tvTitle.setTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+                    layoutContainer.setBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
+                } else {
+                    viewUnreadIndicator.setVisibility(View.VISIBLE);
+                    tvTitle.setTypeface(null, Typeface.BOLD);
+                    tvTitle.setTextColor(android.graphics.Color.WHITE);
+                    layoutContainer.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2E"));
+                }
             } else {
-                viewUnreadIndicator.setVisibility(View.VISIBLE);
-                tvTitle.setTypeface(null, Typeface.BOLD);
-                tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
-                // Light grey/blue background tint for unread
-                layoutContainer.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.grey_light));
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            itemView.getContext().getResources().getColor(R.color.white));
+                }
+                tvMessage.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                tvTime.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+
+                if (notif.isRead()) {
+                    viewUnreadIndicator.setVisibility(View.GONE);
+                    tvTitle.setTypeface(null, Typeface.NORMAL);
+                    tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                    layoutContainer.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.white));
+                } else {
+                    viewUnreadIndicator.setVisibility(View.VISIBLE);
+                    tvTitle.setTypeface(null, Typeface.BOLD);
+                    tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
+                    layoutContainer.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.grey_light));
+                }
             }
 
             // Notification Type Badge styling

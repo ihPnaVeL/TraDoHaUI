@@ -42,6 +42,10 @@ public class ChangePasswordActivity extends AppCompatActivity
 
         setupToolbar();
         initViews();
+
+        if (session.isUser()) {
+            applyDarkTheme();
+        }
     }
 
     private void setupToolbar() {
@@ -110,5 +114,73 @@ public class ChangePasswordActivity extends AppCompatActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void applyDarkTheme() {
+        View root = findViewById(com.haui.devicemanagement.R.id.rootLayout);
+        if (root != null) {
+            root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));
+        }
+        View toolbar = findViewById(com.haui.devicemanagement.R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setBackgroundColor(android.graphics.Color.parseColor("#161616"));
+            if (toolbar instanceof Toolbar && ((Toolbar) toolbar).getNavigationIcon() != null) {
+                androidx.core.graphics.drawable.DrawableCompat.setTint(
+                    androidx.core.graphics.drawable.DrawableCompat.wrap(((Toolbar) toolbar).getNavigationIcon()), 
+                    android.graphics.Color.WHITE
+                );
+            }
+        }
+        androidx.cardview.widget.CardView cardChangePassword = findViewById(com.haui.devicemanagement.R.id.cardChangePassword);
+        if (cardChangePassword != null) {
+            cardChangePassword.setCardBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
+        }
+
+        TextView tvOldPasswordLabel = findViewById(com.haui.devicemanagement.R.id.tvOldPasswordLabel);
+        TextView tvNewPasswordLabel = findViewById(com.haui.devicemanagement.R.id.tvNewPasswordLabel);
+        TextView tvConfirmPasswordLabel = findViewById(com.haui.devicemanagement.R.id.tvConfirmPasswordLabel);
+        if (tvOldPasswordLabel != null) tvOldPasswordLabel.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+        if (tvNewPasswordLabel != null) tvNewPasswordLabel.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+        if (tvConfirmPasswordLabel != null) tvConfirmPasswordLabel.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+
+        if (etOldPassword != null) {
+            etOldPassword.setTextColor(android.graphics.Color.WHITE);
+            etOldPassword.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+        }
+        if (etNewPassword != null) {
+            etNewPassword.setTextColor(android.graphics.Color.WHITE);
+            etNewPassword.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+        }
+        if (etConfirmPassword != null) {
+            etConfirmPassword.setTextColor(android.graphics.Color.WHITE);
+            etConfirmPassword.setHintTextColor(android.graphics.Color.parseColor("#8E8E8E"));
+        }
+
+        com.google.android.material.textfield.TextInputLayout tilOldPassword = findViewById(com.haui.devicemanagement.R.id.tilOldPassword);
+        com.google.android.material.textfield.TextInputLayout tilNewPassword = findViewById(com.haui.devicemanagement.R.id.tilNewPassword);
+        com.google.android.material.textfield.TextInputLayout tilConfirmPassword = findViewById(com.haui.devicemanagement.R.id.tilConfirmPassword);
+        
+        int boxColor = android.graphics.Color.parseColor("#444446");
+        int hintColorVal = android.graphics.Color.parseColor("#8E8E8E");
+        android.content.res.ColorStateList stateList = android.content.res.ColorStateList.valueOf(hintColorVal);
+
+        if (tilOldPassword != null) {
+            tilOldPassword.setBoxStrokeColor(boxColor);
+            tilOldPassword.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+            tilOldPassword.setDefaultHintTextColor(stateList);
+            tilOldPassword.setHintTextColor(stateList);
+        }
+        if (tilNewPassword != null) {
+            tilNewPassword.setBoxStrokeColor(boxColor);
+            tilNewPassword.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+            tilNewPassword.setDefaultHintTextColor(stateList);
+            tilNewPassword.setHintTextColor(stateList);
+        }
+        if (tilConfirmPassword != null) {
+            tilConfirmPassword.setBoxStrokeColor(boxColor);
+            tilConfirmPassword.setBoxStrokeColorStateList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1962D1")));
+            tilConfirmPassword.setDefaultHintTextColor(stateList);
+            tilConfirmPassword.setHintTextColor(stateList);
+        }
     }
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="#121212">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary"
+            android:background="#1A1A1A"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:title="Quản lý sinh viên"
             app:titleTextColor="@color/white" />
@@ -32,13 +32,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Tìm theo MSSV hoặc họ tên..."
-                app:startIconDrawable="@android:drawable/ic_menu_search">
+                app:startIconDrawable="@android:drawable/ic_menu_search"
+                app:startIconTint="#B0B0B0"
+                app:hintTextColor="#8E8E8E"
+                app:boxStrokeColor="#444446"
+                app:boxBackgroundColor="#1C1C1E"
+                app:boxBackgroundMode="filled">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingTop="12dp"
             android:paddingBottom="80dp" />
 
     </LinearLayout>

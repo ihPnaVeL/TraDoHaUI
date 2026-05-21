@@ -48,6 +48,10 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
         setupRecyclerView();
         setupListeners();
 
+        if (session.isUser()) {
+            applyDarkTheme();
+        }
+
         presenter = new NotificationPresenter(DatabaseHelper.getInstance(this));
     }
 
@@ -134,5 +138,32 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void applyDarkTheme() {
+        android.view.View root = findViewById(R.id.rootLayout);
+        if (root != null) {
+            root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));
+        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setBackgroundColor(android.graphics.Color.parseColor("#161616"));
+            if (toolbar.getNavigationIcon() != null) {
+                androidx.core.graphics.drawable.DrawableCompat.setTint(
+                    androidx.core.graphics.drawable.DrawableCompat.wrap(toolbar.getNavigationIcon()), 
+                    android.graphics.Color.WHITE
+                );
+            }
+        }
+        if (tvUnreadStatus != null) {
+            tvUnreadStatus.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+        }
+        if (btnMarkAllRead != null) {
+            btnMarkAllRead.setTextColor(android.graphics.Color.parseColor("#1962D1"));
+        }
+        android.view.View divider = findViewById(R.id.dividerLine);
+        if (divider != null) {
+            divider.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2E"));
+        }
     }
 }
