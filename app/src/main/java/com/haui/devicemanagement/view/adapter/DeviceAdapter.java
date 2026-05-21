@@ -46,6 +46,14 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         return new ArrayList<>(selectedIds);
     }
 
+    public void setSelectedDeviceIds(List<Integer> ids) {
+        selectedIds.clear();
+        if (ids != null) {
+            selectedIds.addAll(ids);
+        }
+        notifyDataSetChanged();
+    }
+
     public void clearSelection() {
         selectedIds.clear();
         notifyDataSetChanged();

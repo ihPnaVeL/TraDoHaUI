@@ -43,11 +43,14 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
 
     private String currentKeyword = "";
     private String currentCategory = "Tất cả";
+    private List<Integer> preSelectedIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_search);
+
+        preSelectedIds = getIntent().getIntegerArrayListExtra("pre_selected_device_ids");
 
         initViews();
         setupToolbar();
@@ -140,9 +143,16 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
                 Toast.makeText(this, "Vui lòng chọn ít nhất 1 thiết bị", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Intent intent = new Intent(this, BorrowCreateActivity.class);
-            intent.putIntegerArrayListExtra("selected_device_ids", new ArrayList<>(selectedIds));
-            startActivity(intent);
+            if (getIntent().getBooleanExtra("IS_SELECTION_MODE", false)) {
+                Intent resultIntent = new Intent();
+                resultIntent.putIntegerArrayListExtra("selected_device_ids", new ArrayList<>(selectedIds));
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            } else {
+                Intent intent = new Intent(this, BorrowCreateActivity.class);
+                intent.putIntegerArrayListExtra("selected_device_ids", new ArrayList<>(selectedIds));
+                startActivity(intent);
+            }
         });
     }
 
@@ -193,6 +203,12 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
             allDevicesList.addAll(devices);
         }
         applyFilter();
+
+        if (preSelectedIds != null && !preSelectedIds.isEmpty()) {
+            adapter.setSelectedDeviceIds(preSelectedIds);
+            updateBottomBar(preSelectedIds);
+            preSelectedIds = null;
+        }
     }
 
     @Override

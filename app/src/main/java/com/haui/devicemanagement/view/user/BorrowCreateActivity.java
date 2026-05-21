@@ -1,6 +1,7 @@
 package com.haui.devicemanagement.view.user;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,12 +29,15 @@ import java.util.Locale;
 
 public class BorrowCreateActivity extends AppCompatActivity implements BorrowPresenter.BorrowActionView {
 
+    private static final int REQUEST_SELECT_DEVICES = 1001;
+
     private BorrowPresenter borrowPresenter;
     private SessionManager sessionManager;
     private List<Integer> selectedDeviceIds;
     private List<Device> selectedDevicesList = new ArrayList<>();
     
     private RecyclerView rvSelectedDevices;
+    private android.widget.TextView tvNoDevices;
     private DeviceAdapter adapter;
     private TextInputEditText etReason;
     private TextInputEditText etExpectedDate;
@@ -50,10 +54,8 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
         setContentView(R.layout.activity_borrow_create);
 
         selectedDeviceIds = getIntent().getIntegerArrayListExtra("selected_device_ids");
-        if (selectedDeviceIds == null || selectedDeviceIds.isEmpty()) {
-            Toast.makeText(this, "Không có thiết bị được chọn!", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
+        if (selectedDeviceIds == null) {
+            selectedDeviceIds = new ArrayList<>();
         }
 
         sessionManager = new SessionManager(this);
@@ -66,10 +68,17 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
         loadSelectedDevices();
 
         btnSubmit.setOnClickListener(v -> submitTicket());
+        findViewById(R.id.btnSelectDevices).setOnClickListener(v -> {
+            Intent intent = new Intent(this, DeviceSearchActivity.class);
+            intent.putExtra("IS_SELECTION_MODE", true);
+            intent.putIntegerArrayListExtra("pre_selected_device_ids", new ArrayList<>(selectedDeviceIds));
+            startActivityForResult(intent, REQUEST_SELECT_DEVICES);
+        });
     }
 
     private void initViews() {
         rvSelectedDevices = findViewById(R.id.rvSelectedDevices);
+        tvNoDevices = findViewById(R.id.tvNoDevices);
         etReason = findViewById(R.id.etReason);
         etExpectedDate = findViewById(R.id.etExpectedDate);
         btnSubmit = findViewById(R.id.btnSubmit);
@@ -126,6 +135,14 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
             }
         }
         adapter.setDevices(selectedDevicesList);
+
+        if (selectedDevicesList.isEmpty()) {
+            tvNoDevices.setVisibility(android.view.View.VISIBLE);
+            rvSelectedDevices.setVisibility(android.view.View.GONE);
+        } else {
+            tvNoDevices.setVisibility(android.view.View.GONE);
+            rvSelectedDevices.setVisibility(android.view.View.VISIBLE);
+        }
     }
 
     private void submitTicket() {
@@ -134,6 +151,11 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
 
         if (userId == -1) {
             Toast.makeText(this, "Chưa đăng nhập sinh viên!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (selectedDeviceIds == null || selectedDeviceIds.isEmpty()) {
+            Toast.makeText(this, "Vui lòng chọn ít nhất 1 thiết bị để mượn!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -150,6 +172,19 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
     @Override
     public void onError(String message) {
         Toast.makeText(this, "Lỗi: " + message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SELECT_DEVICES && resultCode == RESULT_OK && data != null) {
+            List<Integer> newSelectedIds = data.getIntegerArrayListExtra("selected_device_ids");
+            if (newSelectedIds != null) {
+                selectedDeviceIds.clear();
+                selectedDeviceIds.addAll(newSelectedIds);
+                loadSelectedDevices();
+            }
+        }
     }
 
     @Override
