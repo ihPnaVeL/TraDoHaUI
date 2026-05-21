@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HauiDeviceManagement">
+
+        <!-- Entry Point -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Auth -->
+        <activity android:name=".view.auth.LoginActivity" android:exported="false" />
+        <activity android:name=".view.auth.ChangePasswordActivity" android:exported="false" />
+
+        <!-- Common -->
+        <activity android:name=".view.common.NotificationActivity" android:exported="false" />
+
+        <!-- User Screens -->
+        <activity android:name=".view.user.UserHomeActivity" android:exported="false" />
+        <activity android:name=".view.user.DeviceSearchActivity" android:exported="false" />
+        <activity android:name=".view.user.BorrowCreateActivity" android:exported="false" />
+        <activity android:name=".view.user.ReturnCreateActivity" android:exported="false" />
+        <activity android:name=".view.user.MyBorrowActivity" android:exported="false" />
+        <activity android:name=".view.user.MyReturnActivity" android:exported="false" />
+        <activity android:name=".view.user.TicketDetailActivity" android:exported="false" />
+        <activity android:name=".view.user.UserProfileActivity" android:exported="false" />
+
+        <!-- Admin Screens -->
+        <activity android:name=".view.admin.AdminDashboardActivity" android:exported="false" />
+        <activity android:name=".view.admin.BorrowApprovalActivity" android:exported="false" />
+        <activity android:name=".view.admin.AssignDeviceActivity" android:exported="false" />
+        <activity android:name=".view.admin.ReturnApprovalActivity" android:exported="false" />
+        <activity android:name=".view.admin.ReturnDetailCheckActivity" android:exported="false" />
+        <activity android:name=".view.admin.DeviceManageActivity" android:exported="false" />
+        <activity android:name=".view.admin.DeviceDetailManageActivity" android:exported="false" />
+        <activity android:name=".view.admin.UserManageActivity" android:exported="false" />
+        <activity android:name=".view.admin.AdminManageActivity" android:exported="false" />
+        <activity android:name=".view.admin.OverdueActivity" android:exported="false" />
+        <activity android:name=".view.admin.ReportActivity" android:exported="false" />
+
+    </application>
+
+</manifest>
