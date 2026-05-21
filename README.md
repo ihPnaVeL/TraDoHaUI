@@ -10,18 +10,27 @@ Dự án tuân thủ mô hình kiến trúc **MVP (Model-View-Presenter)** để
 
 ```mermaid
 graph TD
-    subgraph View Layer
-        V[Activities/Fragments] <--> VI[View Interfaces]
+    subgraph "View Layer"
+        V["Activities / Fragments"]
+        VI["View Interfaces"]
+        V <--> VI
     end
-    subgraph Presenter Layer
-        P[Presenter Classes]
+
+    subgraph "Presenter Layer"
+        P["Presenter Classes"]
     end
-    subgraph Model Layer (Data)
-        D[DAOs] --> H[DatabaseHelper]
-        E[Entities]
+
+    subgraph "Model Layer - Data"
+        D["DAOs"]
+        H["DatabaseHelper"]
+        E["Entities"]
     end
-    V <-->|Gọi hàm/Nhận sự kiện| P
-    P <-->|Thao tác dữ liệu| D
+
+    V <-->|"Gửi sự kiện người dùng"| P
+    P -->|"Cập nhật giao diện"| VI
+    P <-->|"Thao tác dữ liệu"| D
+    D -->|"Truy vấn SQLite"| H
+    D -->|"Ánh xạ dữ liệu"| E
 ```
 
 ### Chi tiết các tầng trong dự án:

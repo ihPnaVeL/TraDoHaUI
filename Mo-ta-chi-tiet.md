@@ -12,7 +12,7 @@
 - Ngôn ngữ: Java.
 - Database local: SQLite.
 - Kiến trúc: MVP Pattern.
-- Min SDK: API 27 trở lên.
+- Min SDK: API 29 trở lên.
 - UI: XML Layout + Activity + RecyclerView + Adapter.
 
 ### 1.2. Mục tiêu nghiệp vụ
