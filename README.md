@@ -301,7 +301,11 @@ sequenceDiagram
 ### 🛠️ Các bước thiết lập và chạy
 1. **Mở dự án trong Android Studio**:
    * Khởi động Android Studio.
-   * Chọn **Open** và duyệt tới thư mục `c:\TraDoHaUI\HauiDeviceManagement`.
+   * Clone repo về Android Studio
+     ```bash
+     git clone https://github.com/ihPnaVeL/TraDoHaUI.git
+     cd TraDoHaUI
+     
 2. **Đồng bộ hóa Gradle**:
    * Android Studio sẽ tự động tải các thư viện phụ thuộc và đồng bộ dự án (Gradle Sync). 
    * Hãy đảm bảo máy tính của bạn có kết nối mạng ổn định.
@@ -309,7 +313,7 @@ sequenceDiagram
    * Mở **Device Manager** trong Android Studio để tạo một thiết bị ảo (Emulator) chạy hệ điều hành Android 10 (API 29) trở lên.
    * Hoặc kết nối một thiết bị Android thật qua cáp USB và bật chế độ **USB Debugging** (Gỡ lỗi USB) trong cài đặt nhà phát triển.
 4. **Build & Run**:
-   * Nhấn nút **Run** (biểu tượng tam giác màu xanh lá) trên thanh công cụ của Android Studio để bắt đầu biên dịch ứng dụng và cài đặt lên thiết bị của bạn.
+   * Nhấn nút **Run** trên thanh công cụ của Android Studio để bắt đầu biên dịch ứng dụng và cài đặt lên thiết bị của bạn.
 
 ---
 
