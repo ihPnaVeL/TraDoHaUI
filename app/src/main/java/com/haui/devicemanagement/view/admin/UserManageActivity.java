@@ -21,7 +21,6 @@ import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.dao.UserDao;
 import com.haui.devicemanagement.data.entity.User;
 import com.haui.devicemanagement.util.DateUtils;
-import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.UserAdapter;
 
 import java.util.List;
@@ -38,13 +37,14 @@ public class UserManageActivity extends AppCompatActivity implements UserAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_manage);
-        ThemeHelper.applyDarkTheme(this);
 
         userDao = new UserDao(DatabaseHelper.getInstance(this));
 
         initViews();
         setupRecyclerView();
         setupListeners();
+
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(this);
     }
 
     @Override
@@ -133,8 +133,10 @@ public class UserManageActivity extends AppCompatActivity implements UserAdapter
         builder.setNegativeButton("Hủy", null);
 
         AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface -> {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
+        alertDialog.show();
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(alertDialog);
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
                 String mssv = etMssv.getText().toString().trim();
                 String name = etFullName.getText().toString().trim();
                 String className = etClassName.getText().toString().trim();
@@ -173,9 +175,6 @@ public class UserManageActivity extends AppCompatActivity implements UserAdapter
                     Toast.makeText(UserManageActivity.this, isEdit ? "Cập nhật thất bại" : "Thêm thất bại (MSSV đã tồn tại?)", Toast.LENGTH_SHORT).show();
                 }
             });
-        });
-        alertDialog.show();
-        ThemeHelper.applyDarkThemeToDialog(alertDialog);
     }
 
     @Override

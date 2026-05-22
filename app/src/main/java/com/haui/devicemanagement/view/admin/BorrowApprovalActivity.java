@@ -20,7 +20,6 @@ import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.entity.BorrowTicket;
 import com.haui.devicemanagement.presenter.BorrowPresenter;
 import com.haui.devicemanagement.util.SessionManager;
-import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.BorrowTicketAdapter;
 
 import java.util.List;
@@ -39,7 +38,6 @@ public class BorrowApprovalActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_approval);
-        ThemeHelper.applyDarkTheme(this);
 
         sessionManager = new SessionManager(this);
         presenter = new BorrowPresenter(DatabaseHelper.getInstance(this));
@@ -116,9 +114,8 @@ public class BorrowApprovalActivity extends AppCompatActivity
         });
 
         builder.setNeutralButton("Hủy", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        ThemeHelper.applyDarkThemeToDialog(dialog);
+        androidx.appcompat.app.AlertDialog dialog = builder.show();
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(dialog);
     }
 
     private void showRejectReasonDialog(BorrowTicket ticket) {
@@ -141,9 +138,8 @@ public class BorrowApprovalActivity extends AppCompatActivity
         });
 
         builder.setNegativeButton("Hủy", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        ThemeHelper.applyDarkThemeToDialog(dialog);
+        androidx.appcompat.app.AlertDialog dialog = builder.show();
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(dialog);
     }
 
     private void showRejectReasonDialogLayoutPlaceholder() {

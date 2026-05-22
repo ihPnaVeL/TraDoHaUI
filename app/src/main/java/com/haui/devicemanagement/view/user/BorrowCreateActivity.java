@@ -79,6 +79,7 @@ public class BorrowCreateActivity extends AppCompatActivity implements BorrowPre
     }
 
     private void applyDarkTheme() {
+        if (!com.haui.devicemanagement.util.ThemeManager.isDarkMode(this)) return;
         android.view.View root = findViewById(R.id.rootLayout);
         if (root != null) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));

@@ -147,12 +147,19 @@ public class BorrowItemAdapter extends RecyclerView.Adapter<BorrowItemAdapter.Vi
             });
 
             SessionManager session = new SessionManager(itemView.getContext());
-            if (true) {
+            boolean isDark = com.haui.devicemanagement.util.ThemeManager.isDarkMode(itemView.getContext());
+            if (isDark) {
                 if (itemView instanceof androidx.cardview.widget.CardView) {
                     ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
                             android.graphics.Color.parseColor("#1C1C1E"));
                 }
                 applyDarkThemeToItem(itemView);
+            } else {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.WHITE);
+                }
+                applyLightThemeToItem(itemView);
             }
         }
 
@@ -174,6 +181,28 @@ public class BorrowItemAdapter extends RecyclerView.Adapter<BorrowItemAdapter.Vi
                 ViewGroup vg = (ViewGroup) view;
                 for (int i = 0; i < vg.getChildCount(); i++) {
                     applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
+        }
+
+        private void applyLightThemeToItem(View view) {
+            if (view.getId() == R.id.layoutPhysicalDetails) {
+                view.setBackgroundColor(android.graphics.Color.parseColor("#F5F5F5"));
+            }
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvDeviceName) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
+                } else if (id == R.id.tvUnassignedWarning) {
+                    // Keep red warning
+                } else {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyLightThemeToItem(vg.getChildAt(i));
                 }
             }
         }

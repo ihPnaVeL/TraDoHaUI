@@ -1,5 +1,6 @@
 package com.haui.devicemanagement.view.admin;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.presenter.ReportPresenter;
-import com.haui.devicemanagement.util.ThemeHelper;
 
 import java.util.Collections;
 import java.util.Map;
@@ -48,8 +48,6 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
         initViews();
         presenter = new ReportPresenter(DatabaseHelper.getInstance(this));
         presenter.loadReport(this);
-
-        ThemeHelper.applyDarkTheme(this);
     }
 
     private void initViews() {
@@ -68,6 +66,8 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
         containerRows = findViewById(R.id.containerRows);
 
         findViewById(R.id.btnExportExcel).setOnClickListener(v -> exportToExcel());
+
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(this);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
             TextView tvEmpty = new TextView(this);
             tvEmpty.setText("Không có dữ liệu thống kê theo tháng");
             tvEmpty.setPadding(0, 24, 0, 24);
-            tvEmpty.setTextColor(getResources().getColor(R.color.text_secondary));
+            tvEmpty.setTextColor(getResources().getColor(R.color.text_secondary_color));
             tvEmpty.setTextSize(13);
             containerRows.addView(tvEmpty);
             return;
@@ -112,7 +112,7 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
             addStatsRow(month, bCount, rCount);
         }
 
-        ThemeHelper.applyDarkTheme(this);
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(this);
     }
 
     private void addStatsRow(String month, int borrowCount, int returnCount) {
@@ -124,21 +124,21 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
         TextView tvMonth = new TextView(this);
         tvMonth.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         tvMonth.setText(month);
-        tvMonth.setTextColor(getResources().getColor(R.color.text_primary));
+        tvMonth.setTextColor(getResources().getColor(R.color.text_primary_color));
         tvMonth.setTextSize(13);
 
         TextView tvBorrow = new TextView(this);
         tvBorrow.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         tvBorrow.setText(String.valueOf(borrowCount));
         tvBorrow.setGravity(android.view.Gravity.CENTER);
-        tvBorrow.setTextColor(getResources().getColor(R.color.text_secondary));
+        tvBorrow.setTextColor(getResources().getColor(R.color.text_secondary_color));
         tvBorrow.setTextSize(13);
 
         TextView tvReturn = new TextView(this);
         tvReturn.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         tvReturn.setText(String.valueOf(returnCount));
         tvReturn.setGravity(android.view.Gravity.END);
-        tvReturn.setTextColor(getResources().getColor(R.color.text_secondary));
+        tvReturn.setTextColor(getResources().getColor(R.color.text_secondary_color));
         tvReturn.setTextSize(13);
 
         row.addView(tvMonth);
@@ -149,7 +149,7 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
 
         View divider = new View(this);
         divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
-        divider.setBackgroundColor(getResources().getColor(R.color.divider));
+        divider.setBackgroundColor(getResources().getColor(R.color.divider_color));
         containerRows.addView(divider);
     }
 
@@ -191,8 +191,10 @@ public class ReportActivity extends AppCompatActivity implements ReportPresenter
             allMonths.addAll(mReturnByMonth.keySet());
 
             for (String month : allMonths) {
-                int bCount = mBorrowByMonth.containsKey(month) ? mBorrowByMonth.get(month) : 0;
-                int rCount = mReturnByMonth.containsKey(month) ? mReturnByMonth.get(month) : 0;
+                Integer bObj = mBorrowByMonth.get(month);
+                Integer rObj = mReturnByMonth.get(month);
+                int bCount = bObj != null ? bObj : 0;
+                int rCount = rObj != null ? rObj : 0;
                 osw.write(month + "," + bCount + "," + rCount + "\n");
             }
 

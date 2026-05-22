@@ -78,8 +78,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvMessage.setText(notif.getMessage());
             tvTime.setText(notif.getCreatedAt());
 
-            com.haui.devicemanagement.util.SessionManager session = new com.haui.devicemanagement.util.SessionManager(itemView.getContext());
-            boolean isDark = true;
+            // Respect global theme
+            boolean isDark = com.haui.devicemanagement.util.ThemeManager.isDarkMode(itemView.getContext());
 
             if (isDark) {
                 if (itemView instanceof androidx.cardview.widget.CardView) {
@@ -93,7 +93,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     viewUnreadIndicator.setVisibility(View.GONE);
                     tvTitle.setTypeface(null, Typeface.NORMAL);
                     tvTitle.setTextColor(android.graphics.Color.parseColor("#8E8E8E"));
-                    layoutContainer.setBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
+                    layoutContainer.setBackgroundColor(android.graphics.Color.TRANSPARENT);
                 } else {
                     viewUnreadIndicator.setVisibility(View.VISIBLE);
                     tvTitle.setTypeface(null, Typeface.BOLD);
@@ -105,19 +105,19 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
                             itemView.getContext().getResources().getColor(R.color.white));
                 }
-                tvMessage.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
-                tvTime.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                tvMessage.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary_color));
+                tvTime.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary_color));
 
                 if (notif.isRead()) {
                     viewUnreadIndicator.setVisibility(View.GONE);
                     tvTitle.setTypeface(null, Typeface.NORMAL);
-                    tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
-                    layoutContainer.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.white));
+                    tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary_color));
+                    layoutContainer.setBackgroundColor(android.graphics.Color.TRANSPARENT);
                 } else {
                     viewUnreadIndicator.setVisibility(View.VISIBLE);
                     tvTitle.setTypeface(null, Typeface.BOLD);
-                    tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
-                    layoutContainer.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.grey_light));
+                    tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary_color));
+                    layoutContainer.setBackgroundColor(android.graphics.Color.parseColor("#F5F5F5"));
                 }
             }
 

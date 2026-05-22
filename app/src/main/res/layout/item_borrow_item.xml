@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="14dp"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="6dp"
-    app:cardBackgroundColor="#252527">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/card_stroke_color"
+    app:cardBackgroundColor="@color/surface_color">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên loại thiết bị"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -44,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="Ghi chú: Yêu cầu Laptop"
-                    android:textColor="#8E8E8E"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -52,14 +54,12 @@
             <!-- Nút Gán thiết bị (dành cho Admin) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAssign"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:text="Gán TB"
                 android:textSize="12sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                app:backgroundTint="#27AE60"
-                app:cornerRadius="8dp"
+                android:textColor="@color/primary_light"
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#28FFFFFF"
+            android:background="@color/divider_color"
             android:orientation="vertical"
             android:padding="8dp"
             android:visibility="visible">
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Mã TS: HAU-LAP-001"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Serial: DELL001"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tình trạng: Tốt"
-                    android:textColor="#8E8E8E"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="12sp" />
 
                 <TextView
@@ -122,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Phụ kiện: Sạc, túi"
-                    android:textColor="#8E8E8E"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -142,4 +142,4 @@
             android:visibility="gone" />
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

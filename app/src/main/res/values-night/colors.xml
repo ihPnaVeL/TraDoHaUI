@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General UI (Standard Names) - Dark Mode Overrides -->
+    <color name="background">#121212</color>
+    <color name="surface">#1C1C1E</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="divider">#333333</color>
+
+    <!-- Specific Semantic Colors - Dark Mode Overrides -->
+    <color name="background_color">#121212</color>
+    <color name="surface_color">#1C1C1E</color>
+    <color name="text_primary_color">#FFFFFF</color>
+    <color name="text_secondary_color">#B0B0B0</color>
+    <color name="divider_color">#333333</color>
+    <color name="card_stroke_color">#333333</color>
+
+    <!-- Stats Card Colors - Dark Mode -->
+    <color name="pending_borrow_bg">#231709</color>
+    <color name="pending_borrow_stroke">#E67E22</color>
+    <color name="pending_return_bg">#0A1F14</color>
+    <color name="pending_return_stroke">#27AE60</color>
+    <color name="overdue_bg">#2A0B0D</color>
+    <color name="overdue_stroke">#E74C3C</color>
+</resources>

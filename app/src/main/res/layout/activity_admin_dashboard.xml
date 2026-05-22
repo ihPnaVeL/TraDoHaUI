@@ -4,7 +4,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="@color/background_color">
 
     <!-- Main Content Container -->
     <LinearLayout
@@ -64,6 +64,9 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <!-- Theme Toggle Button -->
+                <include layout="@layout/layout_theme_toggle" />
+
                 <!-- Notification Bell -->
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnNotification"
@@ -118,11 +121,11 @@
                         android:layout_height="110dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="6dp"
-                        app:cardBackgroundColor="#231709"
+                        app:cardBackgroundColor="@color/pending_borrow_bg"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="0dp"
                         app:strokeWidth="1dp"
-                        app:strokeColor="#E67E22">
+                        app:strokeColor="@color/pending_borrow_stroke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -159,11 +162,11 @@
                         android:layout_height="110dp"
                         android:layout_weight="1"
                         android:layout_marginHorizontal="6dp"
-                        app:cardBackgroundColor="#0A1F14"
+                        app:cardBackgroundColor="@color/pending_return_bg"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="0dp"
                         app:strokeWidth="1dp"
-                        app:strokeColor="#27AE60">
+                        app:strokeColor="@color/pending_return_stroke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -200,11 +203,11 @@
                         android:layout_height="110dp"
                         android:layout_weight="1"
                         android:layout_marginStart="6dp"
-                        app:cardBackgroundColor="#2A0B0D"
+                        app:cardBackgroundColor="@color/overdue_bg"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="0dp"
                         app:strokeWidth="1dp"
-                        app:strokeColor="#E74C3C">
+                        app:strokeColor="@color/overdue_stroke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -254,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Quản lý phiếu"
-                    android:textColor="#E0E0E0"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -316,10 +319,10 @@
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="6dp"
-                        app:cardBackgroundColor="#1C1C1E"
+                        app:cardBackgroundColor="@color/surface_color"
                         app:cardCornerRadius="14dp"
                         app:strokeWidth="1dp"
-                        app:strokeColor="#2C2C2E">
+                        app:strokeColor="@color/divider_color">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -347,10 +350,10 @@
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         android:layout_marginHorizontal="6dp"
-                        app:cardBackgroundColor="#1C1C1E"
+                        app:cardBackgroundColor="@color/surface_color"
                         app:cardCornerRadius="14dp"
                         app:strokeWidth="1dp"
-                        app:strokeColor="#2C2C2E">
+                        app:strokeColor="@color/divider_color">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -378,10 +381,10 @@
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         android:layout_marginStart="6dp"
-                        app:cardBackgroundColor="#1C1C1E"
+                        app:cardBackgroundColor="@color/surface_color"
                         app:cardCornerRadius="14dp"
                         app:strokeWidth="1dp"
-                        app:strokeColor="#2C2C2E">
+                        app:strokeColor="@color/divider_color">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -411,10 +414,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:layout_marginBottom="24dp"
-                    app:cardBackgroundColor="#1C1C1E"
+                    app:cardBackgroundColor="@color/surface_color"
                     app:cardCornerRadius="14dp"
                     app:strokeWidth="1dp"
-                    app:strokeColor="#2C2C2E">
+                    app:strokeColor="@color/divider_color">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -438,14 +441,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Danh sách quá hạn"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_primary_color"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Xem phiếu đã quá hạn trả"
-                                android:textColor="#B0B0B0"
+                                android:textColor="@color/text_secondary_color"
                                 android:textSize="12sp" />
                         </LinearLayout>
                         <TextView
@@ -468,9 +471,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#1C1C1E"
-        app:itemIconTint="#FFFFFF"
-        app:itemTextColor="#FFFFFF"
+        android:background="@color/surface_color"
+        app:itemIconTint="?attr/colorOnSurface"
+        app:itemTextColor="?attr/colorOnSurface"
         app:headerLayout="@layout/nav_header_admin"
         app:menu="@menu/menu_admin_drawer" />
 

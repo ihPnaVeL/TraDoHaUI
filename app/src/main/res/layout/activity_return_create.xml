@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_color"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -29,13 +29,16 @@
             android:padding="16dp">
 
             <!-- Chọn phiếu mượn -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardSelectBorrowTicket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -55,7 +58,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="8dp"
-                        android:background="@color/divider" />
+                        android:background="@color/divider_color" />
 
                     <!-- Spinner chọn phiếu mượn -->
                     <Spinner
@@ -63,24 +66,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
-                        android:spinnerMode="dropdown"
-                        android:background="@drawable/bg_spinner"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="48dp"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp" />
+                        android:spinnerMode="dropdown" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Danh sách thiết bị trong phiếu mượn đã chọn -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDevices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color"
                 android:visibility="gone">
 
                 <LinearLayout
@@ -101,7 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="8dp"
-                        android:background="@color/divider" />
+                        android:background="@color/divider_color" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvReturnDevices"
@@ -110,15 +111,19 @@
                         android:nestedScrollingEnabled="false" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Card 3: Thông tin trả -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardReturnInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -138,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="8dp"
-                        android:background="@color/divider" />
+                        android:background="@color/divider_color" />
 
                     <!-- Ghi chú trả -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -147,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:hint="Ghi chú trả (ví dụ: Tình trạng thiết bị khi trả...)"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        style="@style/DarkTextInputLayout">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etReturnNote"
@@ -156,11 +161,11 @@
                             android:gravity="top"
                             android:inputType="textMultiLine"
                             android:minLines="3"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary_color" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
@@ -170,7 +175,7 @@
         android:id="@+id/layoutSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/surface_color"
         android:elevation="8dp"
         android:padding="16dp">
 
@@ -178,7 +183,7 @@
             android:id="@+id/btnSubmitReturn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Gửi yêu cầu trả"
+            android:text="GỬI YÊU CẦU TRẢ"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"

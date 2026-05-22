@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_color"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -28,13 +28,16 @@
             android:padding="16dp">
 
             <!-- Card 1: Thông tin chung -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardGeneralInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -54,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Mã phiếu: BR-20231012-001"
-                            android:textColor="@color/primary"
+                            android:textColor="@color/primary_light"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -77,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="10dp"
-                        android:background="@color/divider" />
+                        android:background="@color/divider_color" />
 
                     <!-- Người mượn/trả -->
                     <LinearLayout
@@ -90,7 +93,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:text="Người thực hiện: "
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="13sp" />
 
                         <TextView
@@ -98,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Nguyễn Văn An"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -115,7 +118,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:text="Thời gian tạo: "
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="13sp" />
 
                         <TextView
@@ -123,7 +126,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="12/10/2023 08:30"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -140,7 +143,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:text="Hạn trả dự kiến: "
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="13sp" />
 
                         <TextView
@@ -148,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="15/10/2023"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -168,7 +171,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:text="Người duyệt: "
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="13sp" />
 
                         <TextView
@@ -176,7 +179,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Cán bộ quản lý"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -193,7 +196,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Lý do mượn / Ghi chú:"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -203,13 +206,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="Lý do chi tiết"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Card 2: Danh sách thiết bị -->
             <TextView
@@ -219,7 +222,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="8dp"
                 android:text="Danh sách thiết bị chi tiết"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/text_primary_color"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

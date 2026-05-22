@@ -81,7 +81,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
 
         public void bind(Object item) {
-            com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(itemView);
             boolean isActive;
             if (item instanceof User) {
                 User user = (User) item;

@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,12 +28,15 @@
             android:padding="20dp">
 
             <!-- Profile Info Card -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardProfileInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color"
                 android:layout_marginBottom="20dp">
 
                 <LinearLayout
@@ -46,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="THÔNG TIN ĐỊNH DANH"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_secondary_color"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="12dp" />
@@ -57,14 +60,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mã số:"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_secondary_color"
                         android:textSize="12sp" />
                     <TextView
                         android:id="@+id/tvUserCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2021600001"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/text_primary_color"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="10dp" />
@@ -74,14 +77,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Họ và tên:"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_secondary_color"
                         android:textSize="12sp" />
                     <TextView
                         android:id="@+id/tvFullName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nguyễn Văn A"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/text_primary_color"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="10dp" />
@@ -92,27 +95,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Khoa / Lớp:"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_secondary_color"
                         android:textSize="12sp" />
                     <TextView
                         android:id="@+id/tvRoleOrClass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Khoa CNTT - Lớp CNTT1"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/text_primary_color"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Contact Settings Card -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardContactSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color"
                 android:layout_marginBottom="24dp">
 
                 <LinearLayout
@@ -125,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="THÔNG TIN LIÊN HỆ"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_secondary_color"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp" />
@@ -175,7 +181,7 @@
                         app:cornerRadius="8dp" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Actions -->
             <com.google.android.material.button.MaterialButton
@@ -209,7 +215,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        app:backgroundTint="#161616"
+        app:backgroundTint="@color/surface_color"
         app:menu="@menu/menu_bottom_nav"
         app:itemIconTint="@color/bottom_nav_color_state"
         app:itemTextColor="@color/bottom_nav_color_state"

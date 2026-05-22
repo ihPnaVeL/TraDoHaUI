@@ -25,7 +25,6 @@ import com.haui.devicemanagement.data.entity.DeviceDetail;
 import com.haui.devicemanagement.presenter.DevicePresenter;
 import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.DateUtils;
-import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.DeviceDetailAdapter;
 
 import java.util.ArrayList;
@@ -48,7 +47,6 @@ public class DeviceDetailManageActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_detail_manage);
-        ThemeHelper.applyDarkTheme(this);
 
         filterDeviceId = getIntent().getIntExtra("device_id", -1);
         presenter = new DevicePresenter(DatabaseHelper.getInstance(this));
@@ -57,6 +55,8 @@ public class DeviceDetailManageActivity extends AppCompatActivity
         setupSpinners();
         setupRecyclerView();
         setupListeners();
+
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(this);
     }
 
     @Override
@@ -82,14 +82,14 @@ public class DeviceDetailManageActivity extends AppCompatActivity
     private void setupSpinners() {
         // Status filter values
         String[] statusOptions = {"Tất cả trạng thái", "Sẵn sàng (Available)", "Đang mượn (Borrowed)", "Bảo trì (Maintenance)", "Mất (Lost)"};
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, com.haui.devicemanagement.R.layout.spinner_item, statusOptions);
-        statusAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, statusOptions);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFilterStatus.setAdapter(statusAdapter);
 
         // Condition filter values
         String[] conditionOptions = {"Tất cả tình trạng", "Tốt (Good)", "Trung bình (Fair)", "Hỏng (Damaged)"};
-        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this, com.haui.devicemanagement.R.layout.spinner_item, conditionOptions);
-        conditionAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, conditionOptions);
+        conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFilterCondition.setAdapter(conditionAdapter);
     }
 
@@ -175,20 +175,20 @@ public class DeviceDetailManageActivity extends AppCompatActivity
         for (Device d : devices) {
             deviceNames.add(d.getDeviceName() + " (" + d.getDeviceCode() + ")");
         }
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, com.haui.devicemanagement.R.layout.spinner_item, deviceNames);
-        typeAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deviceNames);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spDeviceType.setAdapter(typeAdapter);
 
         // Setup Availability Status Spinner
         String[] statusOptions = {Constants.DEVICE_AVAILABLE, Constants.DEVICE_BORROWED, Constants.DEVICE_MAINTENANCE, Constants.DEVICE_LOST};
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, com.haui.devicemanagement.R.layout.spinner_item, statusOptions);
-        statusAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, statusOptions);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spAvailabilityStatus.setAdapter(statusAdapter);
 
         // Setup Condition Status Spinner
         String[] conditionOptions = {Constants.CONDITION_GOOD, Constants.CONDITION_FAIR, Constants.CONDITION_DAMAGED};
-        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this, com.haui.devicemanagement.R.layout.spinner_item, conditionOptions);
-        conditionAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, conditionOptions);
+        conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spConditionStatus.setAdapter(conditionAdapter);
 
         boolean isEdit = detail != null;
@@ -240,8 +240,10 @@ public class DeviceDetailManageActivity extends AppCompatActivity
         builder.setNegativeButton("Hủy", null);
 
         AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface -> {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
+        alertDialog.show();
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(alertDialog);
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
                 String assetCode = etAssetCode.getText().toString().trim();
                 String serial = etSerialNumber.getText().toString().trim();
                 String room = etRoomLocation.getText().toString().trim();
@@ -279,9 +281,6 @@ public class DeviceDetailManageActivity extends AppCompatActivity
                 }
                 alertDialog.dismiss();
             });
-        });
-        alertDialog.show();
-        ThemeHelper.applyDarkThemeToDialog(alertDialog);
     }
 
     @Override
@@ -324,12 +323,12 @@ public class DeviceDetailManageActivity extends AppCompatActivity
 
     @Override
     public void onDeleteClick(DeviceDetail detail) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog d = new AlertDialog.Builder(this)
                 .setTitle("Xác nhận xóa")
                 .setMessage("Bạn có chắc chắn muốn xóa thiết bị vật lý này không?")
-                .setPositiveButton("Xóa", (d, which) -> presenter.deleteDeviceDetail(detail.getId(), DeviceDetailManageActivity.this))
+                .setPositiveButton("Xóa", (dialog, which) -> presenter.deleteDeviceDetail(detail.getId(), DeviceDetailManageActivity.this))
                 .setNegativeButton("Hủy", null)
                 .show();
-        ThemeHelper.applyDarkThemeToDialog(dialog);
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(d);
     }
 }

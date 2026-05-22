@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="@color/background_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#161616"
+        android:background="@color/primary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:titleTextColor="@color/white" />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:background="#1C1C1E"
+        android:background="@color/surface_color"
         android:elevation="2dp"
         android:orientation="vertical"
         android:padding="12dp">
@@ -29,8 +29,8 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@drawable/bg_card_dark"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:background="@drawable/bg_chip_category"
+            android:theme="?attr/actionBarTheme"
             android:elevation="1dp"
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Danh mục:"
-                android:textColor="#B0B0B0"
+                android:textColor="@color/text_secondary_color"
                 android:textSize="13sp" />
 
             <View android:layout_width="8dp" android:layout_height="0dp" />
@@ -55,12 +55,10 @@
             <Spinner
                 android:id="@+id/spinnerCategory"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_spinner"
-                android:paddingStart="12dp"
-                android:paddingEnd="40dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp" />
+                android:layout_height="36dp"
+                android:background="@drawable/bg_chip_category"
+                android:theme="?attr/actionBarTheme"
+                android:paddingHorizontal="8dp" />
 
         </LinearLayout>
 
@@ -83,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Không tìm thấy thiết bị nào khả dụng"
-        android:textColor="#8E8E8E"
+        android:textColor="@color/text_secondary_color"
         android:textSize="14sp"
         android:visibility="gone" />
 
@@ -99,7 +97,7 @@
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            app:backgroundTint="#161616"
+            app:backgroundTint="@color/surface_color"
             app:menu="@menu/menu_bottom_nav"
             app:itemIconTint="@color/bottom_nav_color_state"
             app:itemTextColor="@color/bottom_nav_color_state"
@@ -111,7 +109,7 @@
             android:id="@+id/layoutBottomBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1C1C1E"
+            android:background="@color/surface_color"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:padding="16dp"
@@ -129,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Đã chọn: 1 thiết bị"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -137,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bấm tiếp tục để điền lý do mượn"
-                    android:textColor="#B0B0B0"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="11sp" />
 
             </LinearLayout>

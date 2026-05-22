@@ -117,6 +117,7 @@ public class ChangePasswordActivity extends AppCompatActivity
     }
 
     private void applyDarkTheme() {
+        if (!com.haui.devicemanagement.util.ThemeManager.isDarkMode(this)) return;
         View root = findViewById(com.haui.devicemanagement.R.id.rootLayout);
         if (root != null) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));

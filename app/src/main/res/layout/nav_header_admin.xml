@@ -2,33 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="#1C1C1E"
+    android:background="@drawable/bg_primary_gradient"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <!-- Avatar circle representation -->
-    <View
+    <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_logo_circle" />
+        android:paddingTop="8dp"
+        android:src="@drawable/bg_logo_circle" />
 
     <TextView
         android:id="@+id/tvAdminHeaderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quản trị viên"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:paddingTop="8dp"
+        android:text="Admin Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvAdminHeaderPermission"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quyền: Administrator"
-        android:textColor="#B0B0B0"
-        android:textSize="14sp" />
+        android:text="Permission Level" />
 
 </LinearLayout>

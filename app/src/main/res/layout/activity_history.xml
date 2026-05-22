@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="@color/background_color">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#161616"
+        android:background="@color/primary"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="Lịch sử hoạt động"
         app:titleTextColor="@color/white" />
@@ -21,11 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:background="#1E1E1E"
+        android:background="@color/surface_color"
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#1962D1"
-        app:tabTextColor="#8E8E8E"
+        app:tabTextColor="@color/text_secondary_color"
         app:tabIndicatorColor="#1962D1"
         app:tabIndicatorHeight="3dp"
         app:tabTextAppearance="@style/TabTextBold" />
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Chưa có lịch sử hoạt động"
-            android:textColor="#8E8E8E"
+            android:textColor="@color/text_secondary_color"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        app:backgroundTint="#161616"
+        app:backgroundTint="@color/surface_color"
         app:menu="@menu/menu_bottom_nav"
         app:itemIconTint="@color/bottom_nav_color_state"
         app:itemTextColor="@color/bottom_nav_color_state"

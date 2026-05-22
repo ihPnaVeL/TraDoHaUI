@@ -7,8 +7,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.dao.BorrowTicketDao;
 import com.haui.devicemanagement.data.dao.DeviceDetailDao;
@@ -16,13 +19,12 @@ import com.haui.devicemanagement.data.dao.ReturnTicketDao;
 import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.DateUtils;
 import com.haui.devicemanagement.util.SessionManager;
+import com.haui.devicemanagement.util.ThemeHelper;
+import com.haui.devicemanagement.util.ThemeManager;
 import com.haui.devicemanagement.view.auth.LoginActivity;
 import com.haui.devicemanagement.view.common.NotificationActivity;
 
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.core.view.GravityCompat;
-import com.haui.devicemanagement.util.ThemeHelper;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 /**
  * AdminDashboardActivity — Trang tổng quan Admin.
@@ -30,6 +32,8 @@ import com.haui.devicemanagement.util.ThemeHelper;
  * Hiển thị:
  * - Số phiếu mượn chờ duyệt.
  * - Số phiếu trả chờ xác nhận.
+ * - Số thiết bị đang mượn.
+ * - Số thiết bị hỏng/mất.
  * - Số phiếu quá hạn.
  */
 public class AdminDashboardActivity extends AppCompatActivity {
@@ -46,6 +50,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private CardView       cardUserManage;
     private CardView       cardReport;
     private CardView       cardOverdueWarning;
+    private AppCompatImageButton btnThemeToggle;
 
     private DrawerLayout   drawerLayout;
     private NavigationView navigationView;
@@ -95,11 +100,13 @@ public class AdminDashboardActivity extends AppCompatActivity {
         cardUserManage    = findViewById(com.haui.devicemanagement.R.id.cardUserManage);
         cardReport        = findViewById(com.haui.devicemanagement.R.id.cardReport);
         cardOverdueWarning = findViewById(com.haui.devicemanagement.R.id.cardOverdueWarning);
+        btnThemeToggle     = findViewById(com.haui.devicemanagement.R.id.btnThemeToggle);
 
         drawerLayout      = findViewById(com.haui.devicemanagement.R.id.drawerLayout);
         navigationView    = findViewById(com.haui.devicemanagement.R.id.navigationView);
 
         tvAdminName.setText(session.getFullName());
+        updateThemeToggleIcon();
 
         // Setup Nav Header Admin Info
         if (navigationView != null && navigationView.getHeaderCount() > 0) {
@@ -165,6 +172,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
             startActivity(new Intent(this, NotificationActivity.class))
         );
 
+        btnThemeToggle.setOnClickListener(v -> {
+            boolean isDark = ThemeManager.isDarkMode(this);
+            ThemeManager.setDarkMode(this, !isDark);
+            recreate();
+        });
+
         findViewById(com.haui.devicemanagement.R.id.btnMenu).setOnClickListener(v -> {
             if (drawerLayout != null) {
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -208,6 +221,14 @@ public class AdminDashboardActivity extends AppCompatActivity {
             .setNegativeButton("Hủy", null)
             .show();
         ThemeHelper.applyDarkThemeToDialog(dialog);
+    }
+
+    private void updateThemeToggleIcon() {
+        if (ThemeManager.isDarkMode(this)) {
+            btnThemeToggle.setImageResource(com.haui.devicemanagement.R.drawable.ic_sun);
+        } else {
+            btnThemeToggle.setImageResource(com.haui.devicemanagement.R.drawable.ic_moon);
+        }
     }
 
     @Override

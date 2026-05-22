@@ -131,17 +131,18 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void confirmLogout() {
-        new AlertDialog.Builder(this)
+        androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Đăng xuất")
             .setMessage("Bạn có chắc muốn đăng xuất không?")
             .setPositiveButton("Đăng xuất", (d, w) -> {
                 session.clearSession();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, com.haui.devicemanagement.view.auth.LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             })
             .setNegativeButton("Hủy", null)
             .show();
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(dialog);
     }
 
     private void setupListeners() {
@@ -225,6 +226,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void applyDarkTheme() {
+        if (!com.haui.devicemanagement.util.ThemeManager.isDarkMode(this)) return;
         View root = findViewById(R.id.rootLayout);
         if (root != null) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));

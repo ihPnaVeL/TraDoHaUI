@@ -83,12 +83,19 @@ public class ReturnTicketAdapter extends RecyclerView.Adapter<ReturnTicketAdapte
             tvBorrowTicketCode.setText(ticket.getBorrowTicketCode() != null ? ticket.getBorrowTicketCode() : "N/A");
             tvReturnedAt.setText(DateUtils.formatDisplayDateTime(ticket.getReturnedAt()));
 
-            if (true) {
+            boolean isDark = com.haui.devicemanagement.util.ThemeManager.isDarkMode(itemView.getContext());
+            if (isDark) {
                 if (itemView instanceof androidx.cardview.widget.CardView) {
                     ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
                             android.graphics.Color.parseColor("#1C1C1E"));
                 }
                 applyDarkThemeToItem(itemView);
+            } else {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.WHITE);
+                }
+                applyLightThemeToItem(itemView);
             }
 
             if (isAdminView) {
@@ -114,17 +121,32 @@ public class ReturnTicketAdapter extends RecyclerView.Adapter<ReturnTicketAdapte
             if (view instanceof TextView) {
                 TextView tv = (TextView) view;
                 int id = tv.getId();
-                if (id == R.id.tvReturnTicketCode || id == R.id.tvBorrowTicketCode || id == R.id.tvStudentName || id == R.id.tvReturnedAt) {
+                if (id == R.id.tvReturnTicketCode) {
                     tv.setTextColor(android.graphics.Color.WHITE);
-                } else if (id == R.id.tvStatusBadge) {
-                    // Do not modify status badge text colors
-                } else {
+                } else if (id != R.id.tvStatusBadge) {
                     tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
                 }
             } else if (view instanceof ViewGroup) {
                 ViewGroup vg = (ViewGroup) view;
                 for (int i = 0; i < vg.getChildCount(); i++) {
                     applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
+        }
+
+        private void applyLightThemeToItem(View view) {
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvReturnTicketCode) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
+                } else if (id != R.id.tvStatusBadge) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyLightThemeToItem(vg.getChildAt(i));
                 }
             }
         }

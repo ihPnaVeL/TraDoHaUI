@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TỔNG QUAN THIẾT BỊ VÀ PHIẾU"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/text_primary_color"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
@@ -44,15 +44,18 @@
                 android:layout_marginBottom="12dp">
 
                 <!-- Borrowed Devices Card -->
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="6dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_stroke_color"
+                    app:cardBackgroundColor="@color/surface_color">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -72,21 +75,24 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Đang được mượn"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="12sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Maintenance Card -->
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="6dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_stroke_color"
+                    app:cardBackgroundColor="@color/surface_color">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -106,10 +112,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Đang bảo trì"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="12sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <!-- Row 2 -->
@@ -121,14 +127,17 @@
                 android:layout_marginBottom="16dp">
 
                 <!-- Lost Devices Card -->
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
                     android:layout_marginVertical="8dp"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="6dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_stroke_color"
+                    app:cardBackgroundColor="@color/surface_color">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -148,20 +157,23 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Bị mất"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="10sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Pending Borrow Card -->
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="6dp"
                     android:layout_marginVertical="8dp"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="6dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_stroke_color"
+                    app:cardBackgroundColor="@color/surface_color">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -181,20 +193,23 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Chờ duyệt mượn"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="10sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Pending Return Card -->
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     android:layout_marginVertical="8dp"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="6dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_stroke_color"
+                    app:cardBackgroundColor="@color/surface_color">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -214,10 +229,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Chờ duyệt trả"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/text_secondary_color"
                             android:textSize="10sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <!-- Monthly Section -->
@@ -225,17 +240,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="THỐNG KÊ HOẠT ĐỘNG THEO THÁNG (6 THÁNG GẦN NHẤT)"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/text_primary_color"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke_color"
+                app:cardBackgroundColor="@color/surface_color">
 
                 <LinearLayout
                     android:id="@+id/layoutMonthlyStats"
@@ -256,7 +274,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Tháng"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/text_primary_color"
                             android:textStyle="bold"
                             android:textSize="13sp" />
                         <TextView
@@ -282,7 +300,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/divider"
+                        android:background="@color/divider_color"
                         android:layout_marginBottom="8dp" />
 
                     <!-- Dynamically populated rows container -->
@@ -293,7 +311,7 @@
                         android:orientation="vertical" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnExportExcel"

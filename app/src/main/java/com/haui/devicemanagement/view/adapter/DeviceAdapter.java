@@ -104,13 +104,19 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             tvAvailableCount.setText(String.valueOf(device.getAvailableCount()));
             tvCategory.setText(device.getCategory());
 
-            boolean isDark = true;
+            boolean isDark = com.haui.devicemanagement.util.ThemeManager.isDarkMode(itemView.getContext());
             if (isDark) {
                 if (itemView instanceof androidx.cardview.widget.CardView) {
                     ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
                             android.graphics.Color.parseColor("#1C1C1E"));
                 }
                 applyDarkThemeToItem(itemView);
+            } else {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.WHITE);
+                }
+                applyLightThemeToItem(itemView);
             }
 
             if (isSelectionMode) {
@@ -188,6 +194,32 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                 ViewGroup vg = (ViewGroup) view;
                 for (int i = 0; i < vg.getChildCount(); i++) {
                     applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
+        }
+
+        private void applyLightThemeToItem(View view) {
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.btnSelect) {
+                    return;
+                }
+                if (id == R.id.tvDeviceName) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
+                } else if (id == R.id.tvCategory) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.primary));
+                    tv.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                            android.graphics.Color.parseColor("#F0F0F0")));
+                } else if (id == R.id.tvAvailableCount) {
+                    // White text
+                } else {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyLightThemeToItem(vg.getChildAt(i));
                 }
             }
         }

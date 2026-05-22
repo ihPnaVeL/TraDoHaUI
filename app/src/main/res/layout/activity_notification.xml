@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_color"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Có 0 thông báo chưa đọc"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/text_primary_color"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:text="Đọc tất cả"
-            android:textColor="@color/primary"
+            android:textColor="@color/primary_light"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -50,7 +50,7 @@
         android:id="@+id/dividerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/divider" />
+        android:background="@color/divider_color" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNotifications"

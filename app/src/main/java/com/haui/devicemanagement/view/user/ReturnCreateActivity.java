@@ -139,7 +139,7 @@ public class ReturnCreateActivity extends AppCompatActivity {
             displayList.add(t.getTicketCode() + " - Hạn: " + t.getExpectedReturnDate() + statusText);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, com.haui.devicemanagement.R.layout.spinner_item, displayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, displayList) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -158,11 +158,12 @@ public class ReturnCreateActivity extends AppCompatActivity {
                 return view;
             }
         };
-        adapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBorrowTickets.setAdapter(adapter);
     }
 
     private void applyDarkTheme() {
+        if (!com.haui.devicemanagement.util.ThemeManager.isDarkMode(this)) return;
         android.view.View root = findViewById(R.id.rootLayout);
         if (root != null) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));

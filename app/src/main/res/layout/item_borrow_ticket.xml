@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="16dp"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="6dp"
-    app:cardBackgroundColor="#252527">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/card_stroke_color"
+    app:cardBackgroundColor="@color/surface_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="BR-20231012-001"
-                android:textColor="#5B9EF0"
+                android:textColor="@color/primary_light"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -50,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="10dp"
-            android:background="#2C2C2E" />
+            android:background="@color/divider_color" />
 
         <!-- Thông tin sinh viên (ẩn nếu ở view sinh viên, hiển thị cho admin) -->
         <LinearLayout
@@ -65,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Người mượn: "
-                android:textColor="#8E8E8E"
+                android:textColor="@color/text_secondary_color"
                 android:textSize="13sp" />
 
             <TextView
@@ -73,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Văn An (2021600001)"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -90,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lý do: "
-                android:textColor="#8E8E8E"
+                android:textColor="@color/text_secondary_color"
                 android:textSize="13sp" />
 
             <TextView
@@ -98,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mượn thực hành Lab 3"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textSize="13sp" />
@@ -122,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ngày tạo"
-                    android:textColor="#8E8E8E"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="11sp" />
 
                 <TextView
@@ -130,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12/10/2023 08:30"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -145,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hạn trả dự kiến"
-                    android:textColor="#8E8E8E"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="11sp" />
 
                 <TextView
@@ -153,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="15/10/2023"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -162,4 +164,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

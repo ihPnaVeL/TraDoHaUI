@@ -73,7 +73,10 @@ public class TicketDetailActivity extends AppCompatActivity {
         setupToolbar();
         setupRecyclerView();
         
-        applyDarkTheme();
+        SessionManager session = new SessionManager(this);
+        if (session.isUser()) {
+            applyDarkTheme();
+        }
         
         loadData();
     }
@@ -290,6 +293,10 @@ public class TicketDetailActivity extends AppCompatActivity {
     }
 
     private void applyDarkTheme() {
+        if (!com.haui.devicemanagement.util.ThemeManager.isDarkMode(this)) {
+            // Light mode: let the system theme handle it
+            return;
+        }
         View root = findViewById(R.id.rootLayout);
         if (root != null) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#121212"));

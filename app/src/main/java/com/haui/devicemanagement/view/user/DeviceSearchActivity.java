@@ -149,7 +149,7 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
         // Danh sách danh mục tĩnh dựa theo spec
         String[] categories = {"Tất cả", "Laptop", "Projector", "Audio", "Tablet"};
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                com.haui.devicemanagement.R.layout.spinner_item, categories) {
+                android.R.layout.simple_spinner_item, categories) {
             @Override
             public View getView(int position, View convertView, android.view.ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -168,7 +168,7 @@ public class DeviceSearchActivity extends AppCompatActivity implements DevicePre
                 return view;
             }
         };
-        spinnerAdapter.setDropDownViewResource(com.haui.devicemanagement.R.layout.spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(spinnerAdapter);
 
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

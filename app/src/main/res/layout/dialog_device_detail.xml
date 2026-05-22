@@ -15,23 +15,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loại thiết bị gốc"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_secondary_color"
             android:textSize="12sp"
             android:layout_marginBottom="4dp" />
         <Spinner
             android:id="@+id/spDeviceType"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="44dp"
             android:layout_marginBottom="12dp"
-            android:background="@drawable/bg_spinner"
-            android:paddingStart="16dp"
-            android:paddingEnd="48dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:background="@android:drawable/btn_dropdown" />
 
         <!-- Asset Code -->
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/DarkTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -40,12 +36,13 @@
                 android:id="@+id/etAssetCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapCharacters" />
+                android:inputType="textCapCharacters"
+                android:textColor="@color/text_primary_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Serial Number -->
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/DarkTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -54,12 +51,13 @@
                 android:id="@+id/etSerialNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapCharacters" />
+                android:inputType="textCapCharacters"
+                android:textColor="@color/text_primary_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Room Location -->
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/DarkTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -68,7 +66,8 @@
                 android:id="@+id/etRoomLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/text_primary_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Spinner Availability Status -->
@@ -76,42 +75,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng thái hoạt động"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_secondary_color"
             android:textSize="12sp"
             android:layout_marginBottom="4dp" />
         <Spinner
             android:id="@+id/spAvailabilityStatus"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="44dp"
             android:layout_marginBottom="12dp"
-            android:background="@drawable/bg_spinner"
-            android:paddingStart="16dp"
-            android:paddingEnd="48dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:background="@android:drawable/btn_dropdown" />
 
         <!-- Spinner Condition Status -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tình trạng vật lý"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_secondary_color"
             android:textSize="12sp"
             android:layout_marginBottom="4dp" />
         <Spinner
             android:id="@+id/spConditionStatus"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="44dp"
             android:layout_marginBottom="12dp"
-            android:background="@drawable/bg_spinner"
-            android:paddingStart="16dp"
-            android:paddingEnd="48dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:background="@android:drawable/btn_dropdown" />
 
         <!-- Note -->
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/DarkTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -121,7 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:minLines="2" />
+                android:minLines="2"
+                android:textColor="@color/text_primary_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>

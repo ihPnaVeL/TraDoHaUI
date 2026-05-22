@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,7 +22,6 @@ import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.entity.Device;
 import com.haui.devicemanagement.presenter.DevicePresenter;
-import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.DeviceAdapter;
 
 import java.util.List;
@@ -41,13 +39,14 @@ public class DeviceManageActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_manage);
-        ThemeHelper.applyDarkTheme(this);
 
         presenter = new DevicePresenter(DatabaseHelper.getInstance(this));
 
         initViews();
         setupRecyclerView();
         setupListeners();
+
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(this);
     }
 
     @Override
@@ -132,49 +131,48 @@ public class DeviceManageActivity extends AppCompatActivity
 
         if (isEdit) {
             builder.setNeutralButton("Xóa", (dialog, which) -> {
-                AlertDialog deleteConfirmDialog = new AlertDialog.Builder(this)
+                AlertDialog dConfirm = new AlertDialog.Builder(this)
                         .setTitle("Xác nhận xóa")
                         .setMessage("Bạn có chắc chắn muốn xóa loại thiết bị này không? Hành động này không thể hoàn tác nếu không có thiết bị vật lý liên quan.")
                         .setPositiveButton("Xóa", (d, w) -> presenter.deleteDevice(device.getId(), DeviceManageActivity.this))
                         .setNegativeButton("Hủy", null)
                         .show();
-                ThemeHelper.applyDarkThemeToDialog(deleteConfirmDialog);
+                com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(dConfirm);
             });
         }
 
         AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface -> {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
-                String code = etCode.getText().toString().trim();
-                String name = etName.getText().toString().trim();
-                String category = etCategory.getText().toString().trim();
-                String brand = etBrand.getText().toString().trim();
-                String model = etModel.getText().toString().trim();
-                String desc = etDescription.getText().toString().trim();
-
-                if (code.isEmpty() || name.isEmpty() || category.isEmpty()) {
-                    Toast.makeText(DeviceManageActivity.this, "Vui lòng nhập đầy đủ mã, tên và danh mục", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                Device d = isEdit ? device : new Device();
-                d.setDeviceCode(code);
-                d.setDeviceName(name);
-                d.setCategory(category);
-                d.setBrand(brand);
-                d.setModel(model);
-                d.setDescription(desc);
-
-                if (isEdit) {
-                    presenter.updateDevice(d, DeviceManageActivity.this);
-                } else {
-                    presenter.insertDevice(d, DeviceManageActivity.this);
-                }
-                alertDialog.dismiss();
-            });
-        });
         alertDialog.show();
-        ThemeHelper.applyDarkThemeToDialog(alertDialog);
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(alertDialog);
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
+            String code = etCode.getText().toString().trim();
+            String name = etName.getText().toString().trim();
+            String category = etCategory.getText().toString().trim();
+            String brand = etBrand.getText().toString().trim();
+            String model = etModel.getText().toString().trim();
+            String desc = etDescription.getText().toString().trim();
+
+            if (code.isEmpty() || name.isEmpty() || category.isEmpty()) {
+                Toast.makeText(DeviceManageActivity.this, "Vui lòng nhập đầy đủ mã, tên và danh mục", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Device d = isEdit ? device : new Device();
+            d.setDeviceCode(code);
+            d.setDeviceName(name);
+            d.setCategory(category);
+            d.setBrand(brand);
+            d.setModel(model);
+            d.setDescription(desc);
+
+            if (isEdit) {
+                presenter.updateDevice(d, DeviceManageActivity.this);
+            } else {
+                presenter.insertDevice(d, DeviceManageActivity.this);
+            }
+            alertDialog.dismiss();
+        });
     }
 
     @Override

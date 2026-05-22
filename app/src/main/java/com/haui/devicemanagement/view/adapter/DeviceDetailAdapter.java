@@ -1,6 +1,5 @@
 package com.haui.devicemanagement.view.adapter;
 
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,11 +79,25 @@ public class DeviceDetailAdapter extends RecyclerView.Adapter<DeviceDetailAdapte
         }
 
         public void bind(DeviceDetail detail) {
-            com.haui.devicemanagement.util.ThemeHelper.applyDarkTheme(itemView);
             tvAssetCode.setText("Mã TS: " + detail.getAssetCode());
             tvDeviceName.setText(detail.getDeviceName() != null ? detail.getDeviceName() : "Loại thiết bị: #" + detail.getDeviceId());
             tvSerial.setText("Serial: " + (detail.getSerialNumber() != null && !detail.getSerialNumber().isEmpty() ? detail.getSerialNumber() : "N/A"));
             tvRoom.setText("Vị trí: " + (detail.getRoomLocation() != null && !detail.getRoomLocation().isEmpty() ? detail.getRoomLocation() : "N/A"));
+
+            boolean isDark = com.haui.devicemanagement.util.ThemeManager.isDarkMode(itemView.getContext());
+            if (isDark) {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.parseColor("#1C1C1E"));
+                }
+                applyDarkThemeToItem(itemView);
+            } else {
+                if (itemView instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) itemView).setCardBackgroundColor(
+                            android.graphics.Color.WHITE);
+                }
+                applyLightThemeToItem(itemView);
+            }
 
             // Availability Status
             String status = detail.getAvailabilityStatus();
@@ -120,7 +133,7 @@ public class DeviceDetailAdapter extends RecyclerView.Adapter<DeviceDetailAdapte
             }
             GradientDrawable condShape = new GradientDrawable();
             condShape.setCornerRadius(12f);
-            condShape.setColor(android.graphics.Color.parseColor("#2C2C2E"));
+            condShape.setColor(itemView.getContext().getResources().getColor(R.color.grey_light));
             tvCondition.setBackground(condShape);
             tvCondition.setTextColor(condColor);
 
@@ -130,6 +143,40 @@ public class DeviceDetailAdapter extends RecyclerView.Adapter<DeviceDetailAdapte
             btnDelete.setOnClickListener(v -> {
                 if (listener != null) listener.onDeleteClick(detail);
             });
+        }
+
+        private void applyDarkThemeToItem(View view) {
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvAssetCode) {
+                    tv.setTextColor(android.graphics.Color.WHITE);
+                } else if (id != R.id.tvStatus && id != R.id.tvCondition) {
+                    tv.setTextColor(android.graphics.Color.parseColor("#B0B0B0"));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyDarkThemeToItem(vg.getChildAt(i));
+                }
+            }
+        }
+
+        private void applyLightThemeToItem(View view) {
+            if (view instanceof TextView) {
+                TextView tv = (TextView) view;
+                int id = tv.getId();
+                if (id == R.id.tvAssetCode) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_primary));
+                } else if (id != R.id.tvStatus && id != R.id.tvCondition) {
+                    tv.setTextColor(itemView.getContext().getResources().getColor(R.color.text_secondary));
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    applyLightThemeToItem(vg.getChildAt(i));
+                }
+            }
         }
     }
 }

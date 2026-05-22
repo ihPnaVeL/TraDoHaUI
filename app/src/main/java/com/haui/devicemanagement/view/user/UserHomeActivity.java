@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.google.android.material.button.MaterialButton;
 import com.haui.devicemanagement.data.DatabaseHelper;
@@ -14,7 +13,7 @@ import com.haui.devicemanagement.data.dao.BorrowTicketDao;
 import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.DateUtils;
 import com.haui.devicemanagement.util.SessionManager;
-import com.haui.devicemanagement.view.auth.LoginActivity;
+import com.haui.devicemanagement.util.ThemeManager;
 import com.haui.devicemanagement.view.common.NotificationActivity;
 
 /**
@@ -35,6 +34,7 @@ public class UserHomeActivity extends AppCompatActivity {
     private TextView       tvOverdueCount;
     private MaterialButton btnCreateBorrow;
     private MaterialButton btnCreateReturn;
+    private AppCompatImageButton btnThemeToggle;
     private com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigation;
 
     private SessionManager  session;
@@ -70,9 +70,11 @@ public class UserHomeActivity extends AppCompatActivity {
         tvOverdueCount  = findViewById(com.haui.devicemanagement.R.id.tvOverdueCount);
         btnCreateBorrow = findViewById(com.haui.devicemanagement.R.id.btnCreateBorrow);
         btnCreateReturn = findViewById(com.haui.devicemanagement.R.id.btnCreateReturn);
+        btnThemeToggle  = findViewById(com.haui.devicemanagement.R.id.btnThemeToggle);
         bottomNavigation = findViewById(com.haui.devicemanagement.R.id.bottomNavigation);
 
         tvUserName.setText(session.getFullName());
+        updateThemeToggleIcon();
         setupBottomNavigation();
     }
 
@@ -80,7 +82,6 @@ public class UserHomeActivity extends AppCompatActivity {
 
     private void loadDashboard() {
         int userId = session.getAccountId();
-        String today = DateUtils.getCurrentDate();
 
         // Đếm phiếu pending của user này
         long pending  = borrowTicketDao.getByUserId(userId)
@@ -111,6 +112,12 @@ public class UserHomeActivity extends AppCompatActivity {
         findViewById(com.haui.devicemanagement.R.id.btnNotification).setOnClickListener(v ->
             startActivity(new Intent(this, NotificationActivity.class))
         );
+
+        btnThemeToggle.setOnClickListener(v -> {
+            boolean isDark = ThemeManager.isDarkMode(this);
+            ThemeManager.setDarkMode(this, !isDark);
+            recreate();
+        });
     }
 
     private void setupBottomNavigation() {
@@ -142,17 +149,26 @@ public class UserHomeActivity extends AppCompatActivity {
     // ─── LOGOUT ────────────────────────────────────────────────────────────────
 
     private void confirmLogout() {
-        new AlertDialog.Builder(this)
+        androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Đăng xuất")
             .setMessage("Bạn có chắc muốn đăng xuất không?")
             .setPositiveButton("Đăng xuất", (d, w) -> {
                 session.clearSession();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, com.haui.devicemanagement.view.auth.LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             })
             .setNegativeButton("Hủy", null)
             .show();
+        com.haui.devicemanagement.util.ThemeHelper.applyDarkThemeToDialog(dialog);
+    }
+
+    private void updateThemeToggleIcon() {
+        if (ThemeManager.isDarkMode(this)) {
+            btnThemeToggle.setImageResource(com.haui.devicemanagement.R.drawable.ic_sun);
+        } else {
+            btnThemeToggle.setImageResource(com.haui.devicemanagement.R.drawable.ic_moon);
+        }
     }
 
     @Override

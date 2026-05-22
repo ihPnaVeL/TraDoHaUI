@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Style for TextInputLayout that adapts to Light/Dark themes -->
+    <style name="DarkTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/primary_light</item>
+        <item name="android:textColorHint">@color/text_secondary_color</item>
+        <item name="boxStrokeColor">@color/primary_light</item>
+        <item name="boxBackgroundColor">@color/surface_color</item>
+    </style>
+
+    <!-- Theme Toggle Switch Style -->
+    <style name="ThemeToggleSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/ic_moon</item>
+        <item name="track">@drawable/bg_logo_circle</item>
+    </style>
+</resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="@color/background_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#1A1A1A"
+            android:background="@color/primary"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:title="Quản lý thiết bị vật lý"
             app:titleTextColor="@color/white" />
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lọc theo Trạng thái"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="11sp" />
 
                 <Spinner
@@ -47,11 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="4dp"
-                    android:background="@drawable/bg_spinner"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="36dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp" />
+                    android:background="@android:drawable/btn_dropdown" />
 
             </LinearLayout>
 
@@ -66,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lọc theo Tình trạng"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/text_secondary_color"
                     android:textSize="11sp" />
 
                 <Spinner
@@ -74,11 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="4dp"
-                    android:background="@drawable/bg_spinner"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="36dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp" />
+                    android:background="@android:drawable/btn_dropdown" />
 
             </LinearLayout>
 
@@ -87,14 +79,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#2C2C2E" />
+            android:background="@color/divider_color" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDeviceDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingTop="12dp"
             android:paddingBottom="80dp" />
 
     </LinearLayout>

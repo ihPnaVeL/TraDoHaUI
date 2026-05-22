@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tình trạng nhận lại thiết bị:"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/text_secondary_color"
         android:textSize="13sp"
         android:layout_marginBottom="8dp" />
 
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tốt"
+            android:textColor="@color/text_primary_color"
             android:checked="true" />
 
         <RadioButton
@@ -35,14 +36,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hỏng" />
+            android:text="Hỏng"
+            android:textColor="@color/text_primary_color" />
 
         <RadioButton
             android:id="@+id/rbLost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mất" />
+            android:text="Mất"
+            android:textColor="@color/text_primary_color" />
     </RadioGroup>
 
     <!-- Phụ kiện trả lại -->
@@ -51,14 +54,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Phụ kiện trả lại"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/DarkTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAccessoriesIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đầy đủ"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Ghi chú hỏng/mất -->
@@ -67,13 +70,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Mô tả hỏng/mất (nếu có)"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/DarkTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDamageNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Phí phạt bồi thường -->
@@ -81,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phí bồi thường (VNĐ)"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/DarkTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPenaltyAmount"
@@ -89,7 +92,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:text="0"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

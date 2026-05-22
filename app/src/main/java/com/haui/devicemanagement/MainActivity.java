@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.haui.devicemanagement.util.Constants;
 import com.haui.devicemanagement.util.SessionManager;
+import com.haui.devicemanagement.util.ThemeManager;
 import com.haui.devicemanagement.view.auth.LoginActivity;
 import com.haui.devicemanagement.view.admin.AdminDashboardActivity;
 import com.haui.devicemanagement.view.user.UserHomeActivity;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeManager.applyTheme(this);
 
         SessionManager session = new SessionManager(this);
 

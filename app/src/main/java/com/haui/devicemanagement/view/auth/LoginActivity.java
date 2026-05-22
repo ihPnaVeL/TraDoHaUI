@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements AuthPresenter.Lo
         initViews();
         setupTabListener();
         setupLoginButton();
-        applyDynamicTheme(true);
+        applyDynamicTheme(com.haui.devicemanagement.util.ThemeManager.isDarkMode(this));
     }
 
     // ─── INIT ──────────────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements AuthPresenter.Lo
             public void onTabSelected(TabLayout.Tab tab) {
                 isAdminMode = (tab.getPosition() == 1);
                 updateFormForMode();
-                applyDynamicTheme(true);
+                applyDynamicTheme(!isAdminMode);
                 clearError();
             }
 

@@ -16,7 +16,6 @@ import com.haui.devicemanagement.R;
 import com.haui.devicemanagement.data.DatabaseHelper;
 import com.haui.devicemanagement.data.entity.ReturnTicket;
 import com.haui.devicemanagement.presenter.ReturnPresenter;
-import com.haui.devicemanagement.util.ThemeHelper;
 import com.haui.devicemanagement.view.adapter.ReturnTicketAdapter;
 
 import java.util.List;
@@ -32,7 +31,6 @@ public class ReturnApprovalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_return_approval);
-        ThemeHelper.applyDarkTheme(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
