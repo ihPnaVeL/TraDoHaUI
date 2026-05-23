@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity implements AuthPresenter.Lo
             public void onTabSelected(TabLayout.Tab tab) {
                 isAdminMode = (tab.getPosition() == 1);
                 updateFormForMode();
-                applyDynamicTheme(!isAdminMode);
                 clearError();
             }
 

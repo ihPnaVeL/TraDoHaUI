@@ -18,7 +18,7 @@ public class ThemeManager {
 
     public static boolean isDarkMode(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean(KEY_IS_DARK_MODE, true); // Default to dark mode based on current state
+        return prefs.getBoolean(KEY_IS_DARK_MODE, false); // Mặc định là Light Mode
     }
 
     public static void setDarkMode(Context context, boolean isDark) {
