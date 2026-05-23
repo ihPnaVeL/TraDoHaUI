@@ -304,8 +304,8 @@ sequenceDiagram
    * Clone repo về Android Studio
      ```bash
      git clone https://github.com/ihPnaVeL/TraDoHaUI.git
-     cd TraDoHaUI
-     
+
+   *Lưu ý: Để đồng bộ hóa Gradle ở bước 2 diễn ra trong Android Studio phải mở thư mục TraDoHaUI chứ không phải ở thư mục cha bên ngoài.**
 2. **Đồng bộ hóa Gradle**:
    * Android Studio sẽ tự động tải các thư viện phụ thuộc và đồng bộ dự án (Gradle Sync). 
    * Hãy đảm bảo máy tính của bạn có kết nối mạng ổn định.
